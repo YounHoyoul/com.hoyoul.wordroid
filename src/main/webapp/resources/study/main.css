@@ -1,0 +1,124 @@
+﻿*{
+  margin:0px;
+  padding:0px;
+}
+h1{
+  font: bold 20px Tahoma;
+}
+h2{
+  font: bold 14px Tahoma;
+}
+header,section,footer,aside,nav,article,hgroup{
+  display:block;
+}
+body{
+  text-align:center;
+}
+#big_wrapper{
+  border: 1px solid black;
+  width: 1000px;
+  margin: 20px auto; 
+  text-align: left;
+}
+#top_header{
+  background: yellow;
+  border: 1px solid blue;
+  padding: 20px;
+}
+#top_menu{
+  background: blue;
+  color: white;
+}
+#top_menu li{
+  display: inline-block;
+  list-style: none;
+  padding: 5px;
+  font: bold 14px Tahoma;
+}
+#main_section{
+  float: left;
+  width: 660px;
+  margin: 30px; /*section:720px aside:280px*/
+}
+#side_news{
+  float: left;
+  width: 220px;
+  margin: 20px 0px;
+  padding: 30px;
+  background: #66CCCC;
+}
+#the_footer{
+  clear: both;
+  text-align: center;
+  padding: 20px;
+  border-top: 2px solid green;
+}
+article{
+  background: #FFFBCC;
+  border: 1px solid red;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+article footer{
+  text-align:right;
+}
+
+.studybox{
+  padding: 4px;
+  font: bold 13px Tahoma;
+  border: 1px solid #cdcdcd;
+  width: 150px;
+  height: 150px;
+  list-style: none;
+  overflow: auto;
+  border-radius : 4px;
+}
+
+#card_frame{
+  width: 615px;
+  height: 200px;
+  padding: 0px;
+  margin-bottom: 10px;
+}
+
+.card{
+  width: 575px;
+  height: 160px;
+  border: 2px solid #cdcdcd;
+  border-radius: 8px;
+  font: bold 30px Tahoma; 
+  text-align: center;
+  padding: 20px;
+  background-color:#fff;
+}
+#box_frame{
+  width: 615px;
+  height: 100px;
+  border-radius : 0px;
+}
+.box{
+  display:inline-block;
+  width: 203px;
+  height: 100px;
+  border: 2px solid #CDCDCD;
+  border-radius : 0px;
+  overflow: hidden;
+  background-color:#fff;
+  font: bold 14px Tahoma;
+  color: #CDCDCD;
+  text-align:center;
+}
+
+.border{
+  color: red;
+  border: 2px solid red;
+}
+
+.drag{
+  color: rgba(0,0,0,0.2);
+  background-color:rgba(255,255,255,0.2)
+}
+
+.box li{
+  list-style : none;
+}
