@@ -35,14 +35,4 @@ public class HomeController {
 		
 		return "home";
 	}
-	
-	@RequestMapping(value = "study", method = RequestMethod.GET)
-	public String study() {	
-		return "study";
-	}
-
-	@RequestMapping(value = "data", method = RequestMethod.GET)
-	public String data() {	
-		return "data";
-	}	
 }

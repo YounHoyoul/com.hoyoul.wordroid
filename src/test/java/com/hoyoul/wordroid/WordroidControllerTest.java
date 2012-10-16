@@ -33,6 +33,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
+import com.hoyoul.wordroid.controller.WordroidController;
+import com.hoyoul.wordroid.dto.Word;
+import com.hoyoul.wordroid.service.WordService;
+
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration("servlet-context.xml")
 public class WordroidControllerTest {
@@ -43,6 +47,12 @@ public class WordroidControllerTest {
 
     //@Autowired
     //private ApplicationContext applicationContext; 
+    
+    @InjectMocks
+    private static WordroidController controller;
+    
+    @Mock
+    private static WordService service;
     
     /*
     @InjectMocks
@@ -70,15 +80,28 @@ public class WordroidControllerTest {
         
 		context = new ClassPathXmlApplicationContext("servlet-context.xml");
 		
-		SessionFactory session=context.getBean("sessionFactory",SessionFactory.class);
+		//SessionFactory session=context.getBean("sessionFactory",SessionFactory.class);
+		
+		service = context.getBean("wordServiceImpl",WordService.class);
+		service.addWord(new Word("She's got her father's eyes","개 눈은 아빠랑 닮았어"));
+		service.addWord(new Word("I'm going to the English class!","영어학원 가려구요"));
+		service.addWord(new Word("My feet are killing me","다리가 너무 아파"));
 
     }
     
     @Test
-    public void testData(){
+    public void testData() throws Exception{
     	
-    	fail("not yet implemented.");
-    	
+    	request.setRequestURI("/data");
+        request.setMethod("GET");
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        List<Word> list = service.listWord();
+        
+        assertEquals(3,list.size());
+        assertThat(mav.getModelMap().get("wordList"),is(List.class));
+        assertThat(mav.getViewName(),is("data"));
     }
     
     /*
