@@ -81,8 +81,9 @@ public class WordroidControllerTest {
 		context = new ClassPathXmlApplicationContext("servlet-context.xml");
 		
 		//SessionFactory session=context.getBean("sessionFactory",SessionFactory.class);
-		
+		controller = context.getBean("wordroidController",WordroidController.class);
 		service = context.getBean("wordServiceImpl",WordService.class);
+		
 		service.addWord(new Word("She's got her father's eyes","개 눈은 아빠랑 닮았어"));
 		service.addWord(new Word("I'm going to the English class!","영어학원 가려구요"));
 		service.addWord(new Word("My feet are killing me","다리가 너무 아파"));

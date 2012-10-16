@@ -1,4 +1,15 @@
-﻿{
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+{"items":[
+<c:if  test="${not empty wordList}">
+	<c:forEach items="${wordList}" var="word" varStatus="status">
+	{"id":"${word.id}","bx":"1","wd":"${word.word}","mn":"${word.mean}"}<c:if test="${not status.last}">,</c:if>
+	</c:forEach>
+</c:if>	
+]}
+<%
+/*
+{
   "items":
   [
     {"id":"1","bx":"1","wd":"She's got her father's eyes","mn":"개 눈은 아빠랑 닮았어"},
@@ -11,3 +22,5 @@
     {"id":"8","bx":"1","wd":"What did you do during the break","mn":"쉬는 시간에 뭐했어."}
   ]
 }
+*/
+%>

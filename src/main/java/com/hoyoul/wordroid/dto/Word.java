@@ -26,6 +26,10 @@ public class Word {
 	@Column(name="DUETIME")
 	private Date dueTime;
 	
+	public Word(){
+		
+	}
+	
 	public Word(String word, String mean) {
 		this.word = word;
 		this.mean = mean;

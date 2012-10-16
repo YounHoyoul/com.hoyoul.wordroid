@@ -1,5 +1,7 @@
 package com.hoyoul.wordroid.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,9 @@ public class WordroidController {
 	}
 
 	@RequestMapping(value = "data", method = RequestMethod.GET)
-	public String data(Model map) {
+	public String data(Model model,HttpServletRequest request) {
 		
-		map.addAttribute("wordList",wordService.listWord());
+		model.addAttribute("wordList",wordService.listWord());
 		
 		return "data";
 	}	
