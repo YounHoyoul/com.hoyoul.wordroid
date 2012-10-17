@@ -3,10 +3,12 @@ package com.hoyoul.wordroid.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.hoyoul.wordroid.dao.WordsetDAO;
 import com.hoyoul.wordroid.dto.Wordset;
 
+@Service
 public class WordsetServiceImpl implements WordsetService {
 
 	@Autowired
