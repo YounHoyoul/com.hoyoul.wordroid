@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="WordroidWord")
+@Table(name="WR_WORD")
 public class Word {
 	@Id
 	@GeneratedValue

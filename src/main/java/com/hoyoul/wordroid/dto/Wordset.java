@@ -2,16 +2,19 @@ package com.hoyoul.wordroid.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="WordroidWordset")
+@Table(name="WR_WORDSET")
 public class Wordset {
 	
 	@Id
@@ -30,6 +33,30 @@ public class Wordset {
 	@OneToMany(mappedBy="wordset",fetch=FetchType.EAGER)
 	private List<Word> words;
 	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="USERID")
+	private User user;
+	
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="FOLDERID")
+	private Folder folder;
+		
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
+	}
+
 	public Integer getId() {
 		return id;
 	}
