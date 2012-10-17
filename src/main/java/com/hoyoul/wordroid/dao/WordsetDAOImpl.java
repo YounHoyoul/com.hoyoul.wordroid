@@ -14,68 +14,32 @@ public class WordsetDAOImpl implements WordsetDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Wordset> listWordset() {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();		
-		
-		@SuppressWarnings("unchecked")
-		List<Wordset> list = session.createQuery("from Wordset").list();
-		
-		session.getTransaction().commit();
-		session.close();
-		
-		return list;
+		return sessionFactory.getCurrentSession().createQuery("from Wordset").list();
 	}	
 	
 	@Override
 	public int addWordset(Wordset wordset) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		int id = ((Integer) session.save(wordset)).intValue();
-		
-		session.getTransaction().commit();
-		session.close();
-		
-		return id;
+		return (Integer) sessionFactory.getCurrentSession().save(wordset);
 	}
 
 	@Override
 	public Wordset getWordset(Integer id) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		Wordset wordset = (Wordset) session.get(Wordset.class, id);
-		
-		session.getTransaction().commit();
-		session.close();
-		
-		return wordset;
+		return (Wordset) sessionFactory.getCurrentSession().get(Wordset.class, id);
 	}
 
 	@Override
 	public void updateWordset(Wordset wordset) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		session.update(wordset);
-		
-		session.getTransaction().commit();
-		session.close();
+		sessionFactory.getCurrentSession().update(wordset);
 	}
 
 	@Override
 	public void deleteWordset(Integer id) {
 		Wordset wordset = getWordset(id);
 		if(null != wordset){
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			
-			session.delete(wordset);
-			
-			session.getTransaction().commit();
-			session.close();
+			sessionFactory.getCurrentSession().delete(wordset);
 		}
 	}
 

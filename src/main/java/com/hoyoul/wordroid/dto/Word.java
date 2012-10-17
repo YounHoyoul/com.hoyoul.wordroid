@@ -32,6 +32,13 @@ public class Word {
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="WORDSETID")
 	private Wordset wordset;
+
+	public Word(){}
+	
+	public Word(String word, String mean) {
+		this.word = word;
+		this.mean = mean;
+	}
 	
 	public Word(Wordset wordset, String word, String mean){
 		this.wordset = wordset;
@@ -39,9 +46,12 @@ public class Word {
 		this.mean = mean;
 	}
 	
-	public Word(String word, String mean) {
-		this.word = word;
-		this.mean = mean;
+	public Wordset getWordset() {
+		return wordset;
+	}
+
+	public void setWordset(Wordset wordset) {
+		this.wordset = wordset;
 	}
 
 	public Integer getId() {

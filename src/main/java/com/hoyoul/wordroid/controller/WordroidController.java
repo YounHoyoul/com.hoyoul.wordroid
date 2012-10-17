@@ -68,13 +68,8 @@ public class WordroidController {
 	public String updateBox(@PathVariable("wordId") Integer wordId,
 			Model model,HttpServletRequest request) {
 		
-		logger.debug("wordId="+wordId);
-		logger.debug("box="+request.getParameter("box"));
-		
 		Word word = wordService.getWord(wordId);
 		word.setBox(Integer.parseInt(request.getParameter("box")));
-		
-		logger.debug("box="+word.getBox());
 		
 		wordService.updateWord(word);
 		
@@ -85,7 +80,6 @@ public class WordroidController {
 	public String delete(@PathVariable("wordId") Integer wordId,
 			Model model,HttpServletRequest request) {
 		
-		//model.addAttribute("wordList",wordService.listWord());
 		wordService.deleteWord(wordId);
 		
 		return "result";
