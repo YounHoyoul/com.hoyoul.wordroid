@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
 import com.hoyoul.wordroid.controller.WordsetController;
+import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.dto.Wordset;
+import com.hoyoul.wordroid.service.WordService;
 import com.hoyoul.wordroid.service.WordsetService;
 
 public class WordsetControllerTest {
@@ -58,13 +60,23 @@ public class WordsetControllerTest {
 
 		Wordset wordset = service.getWordset(1);
 		
-		/*
-		wordset.getWords().add(new Word(wordset,"She's got her father's eyes","개 눈은 아빠랑 닮았어"));
-		wordset.getWords().add(new Word(wordset,"I'm going to the English class!","영어학원 가려구요"));
-		wordset.getWords().add(new Word(wordset,"My feet are killing me","다리가 너무 아파"));
+		Word word1 = new Word(wordset,"She's got her father's eyes","개 눈은 아빠랑 닮았어");
+		Word word2 = new Word(wordset,"I'm going to the English class!","영어학원 가려구요");
+		Word word3 = new Word(wordset,"My feet are killing me","다리가 너무 아파");
+		
+		WordService wordService = context.getBean("wordServiceImpl",WordService.class);
+		wordService.addWord(word1);
+		word1 = wordService.getWord(1);
+		
+		wordset.getWords().add(word1);
+		wordset.getWords().add(word2);
+		wordset.getWords().add(word3);
+
+		word1.setWordset(wordset);
+		word2.setWordset(wordset);
+		word3.setWordset(wordset);
 		
 		service.updateWordset(wordset);
-		*/
 		
     }
     
@@ -155,6 +167,5 @@ public class WordsetControllerTest {
         assertNull(actualWordset);
         assertThat(mav.getViewName(),is("redirect:/wordset/list"));
     }
-    
     
 }

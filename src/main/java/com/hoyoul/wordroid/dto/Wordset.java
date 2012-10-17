@@ -27,7 +27,7 @@ public class Wordset {
 	@Column(name="MAGIC7")
 	private Boolean magic7;
 	
-	@OneToMany(mappedBy="wordset",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="wordset",fetch=FetchType.EAGER)
 	private List<Word> words;
 	
 	public Integer getId() {
