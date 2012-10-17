@@ -1,0 +1,21 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <definition name="base.plain" template="/WEB-INF/template/layout_plain.jsp">
+        <put-attribute name="body"   value="/WEB-INF/template/body.jsp"/>
+    </definition>
+    
+    <definition name="data" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/data.jsp"/>
+    </definition>
+    <definition name="result" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/result.jsp"/>
+    </definition>
+    
+</tiles-definitions>
+
+
+

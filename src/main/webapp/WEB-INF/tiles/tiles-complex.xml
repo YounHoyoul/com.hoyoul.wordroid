@@ -1,0 +1,34 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <definition name="base.complex" template="/WEB-INF/template/layout_complex.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/template/header.jsp"/>
+        <put-attribute name="menu"   value="/WEB-INF/template/menu.jsp"/>
+        <put-attribute name="body"   value="/WEB-INF/template/body.jsp"/>
+        <put-attribute name="sidebar"   value="/WEB-INF/template/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/template/footer.jsp"/>
+    </definition>
+    
+    <!-- base.complex -->
+    
+    <!-- 이것은 /admin/board/list 이런식이면 적용 -->
+    <definition name="*/*/*" extends="base.complex">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp"/>
+    </definition>
+    <!-- 이것은 /admin/board 이런식이면 적용 -->
+    <definition name="*/*" extends="base.complex">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+    </definition>
+    <!-- 이것은 /admin 일때 적용!!  -->
+    <definition name="*" extends="base.complex">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+
+</tiles-definitions>
+
+
+

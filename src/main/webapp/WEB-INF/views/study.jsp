@@ -2,39 +2,8 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<title>Wordroid's Website</title>
-	
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-  <link rel="stylesheet" href="<c:url value="/resources/study/main.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/study/study.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/dialog/basic.css"/>" />
-        
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-  <script type="text/javascript" src="<c:url value="/resources/study/study.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/resources/dialog/jquery.simplemodal.js"/>"></script>
-  
-</head>
-<body>
-  <div id="big_wrapper">
-    <header id="top_header">
-      <h1>Welcome to Wordroid!</h1>
-    </header>
-    
-    <nav id="top_menu">
-      <ul>
-        <li>Home</li>
-        <li>Tutorial</li>
-        <li>Padcast</li>
-      </ul>
-    </nav>
-    
-    <section id="main_section">
       <article>
         
         <div id="option_frame">
@@ -109,17 +78,6 @@
              
         
       </article>    
-    </section>
+
 
     
-    <aside id="side_news">
-      <h4>News</h4>
-      Bucky has a new dog!
-    </aside>
-    
-    <footer id="the_footer">
-      Copyright Wordroid 2012
-    </footer>
-  </div>
-</body>	
-</html>
