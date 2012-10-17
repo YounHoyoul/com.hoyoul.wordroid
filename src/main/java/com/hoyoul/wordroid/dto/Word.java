@@ -33,8 +33,10 @@ public class Word {
 	@JoinColumn(name="WORDSETID")
 	private Wordset wordset;
 	
-	public Word(){
-		
+	public Word(Wordset wordset, String word, String mean){
+		this.wordset = wordset;
+		this.word = word;
+		this.mean = mean;
 	}
 	
 	public Word(String word, String mean) {
