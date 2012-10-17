@@ -1,7 +1,5 @@
 package com.hoyoul.wordroid.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.hoyoul.wordroid.HomeController;
 import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.service.WordService;
 
@@ -27,7 +24,8 @@ public class WordroidController {
 	private WordService wordService;
 	
 	@RequestMapping(value = "/study", method = RequestMethod.GET)
-	public String study() {	
+	public String study() {
+		
 		return "study";
 	}
 
@@ -43,7 +41,6 @@ public class WordroidController {
 	public String add(@ModelAttribute("word") Word word,
 			Model model,HttpServletRequest request) {
 		
-		//model.addAttribute("wordList",wordService.listWord());
 		wordService.addWord(word);
 		
 		return "result";
@@ -52,9 +49,7 @@ public class WordroidController {
 	@RequestMapping(value = "/update/{wordId}", method = RequestMethod.POST)
 	public String update(@PathVariable("wordId") Integer wordId,
 			Model model,HttpServletRequest request) {
-		
-		//model.addAttribute("wordList",wordService.listWord());
-		
+			
 		Word word = wordService.getWord(wordId);
 		word.setWord(request.getParameter("word"));
 		word.setMean(request.getParameter("mean"));

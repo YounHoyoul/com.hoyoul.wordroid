@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -83,6 +82,8 @@ public class Wordset {
 	}
 	
 	public Wordset(String name, String desc) {
+		this.name = name;
+		this.description =desc;
 	}
 
 }

@@ -2,9 +2,6 @@ package com.hoyoul.wordroid;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
 import java.util.List;
 
 import org.junit.Before;
@@ -20,11 +17,8 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
-import com.hoyoul.wordroid.controller.WordroidController;
 import com.hoyoul.wordroid.controller.WordsetController;
-import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.dto.Wordset;
-import com.hoyoul.wordroid.service.WordService;
 import com.hoyoul.wordroid.service.WordsetService;
 
 public class WordsetControllerTest {
@@ -107,10 +101,10 @@ public class WordsetControllerTest {
     @Test
     public void add() throws Exception{
     	
-    	request.setRequestURI("/wordset/list");
+    	request.setRequestURI("/wordset/add");
         request.setMethod("POST");
         request.setParameter("name","Third Wordset");
-        request.setParameter("desc", "Third Wordset Description.");
+        request.setParameter("description", "Third Wordset Description.");
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
@@ -137,8 +131,9 @@ public class WordsetControllerTest {
     	
     	request.setRequestURI("/wordset/update/2");
         request.setMethod("POST");
+        request.setParameter("id","2");
         request.setParameter("name","Second Wordset[Modify]");
-        request.setParameter("desc", "Second Wordset Description[Modify].");
+        request.setParameter("description", "Second Wordset Description[Modify].");
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
