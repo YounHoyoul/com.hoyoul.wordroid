@@ -3,7 +3,7 @@
 {"items":[
 <c:if  test="${not empty wordList}">
 	<c:forEach items="${wordList}" var="word" varStatus="status">
-	{"id":"${word.id}","bx":"1","wd":"${word.word}","mn":"${word.mean}"}<c:if test="${not status.last}">,</c:if>
+	{"id":"${word.id}","bx":"${word.box}","wd":"${word.word}","mn":"${word.mean}"}<c:if test="${not status.last}">,</c:if>
 	</c:forEach>
 </c:if>	
 ]}

@@ -42,6 +42,11 @@
 #box_frame{
   height: 50px;
 }
+#button_frame{
+  width: 605px;
+  padding:5px;
+  text-align: right;
+}
 
 .answer{
   display:inline-block;

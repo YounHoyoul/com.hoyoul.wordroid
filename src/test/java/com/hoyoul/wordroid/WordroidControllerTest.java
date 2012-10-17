@@ -45,26 +45,13 @@ public class WordroidControllerTest {
     private MockHttpSession session;
     private AnnotationMethodHandlerAdapter adapter;
 
-    //@Autowired
-    //private ApplicationContext applicationContext; 
-    
     @InjectMocks
     private static WordroidController controller;
     
     @Mock
     private static WordService service;
     
-    /*
-    @InjectMocks
-    private static BoardController2 controller;
-    
-    @Mock
-    private static BoardService boardService;
-    private static CommentService commentService;
-	*/
-    
     private static ApplicationContext context;
-
     
 	@BeforeClass
 	public static void init(){
@@ -91,7 +78,7 @@ public class WordroidControllerTest {
     }
     
     @Test
-    public void testData() throws Exception{
+    public void list() throws Exception{
     	
     	request.setRequestURI("/data");
         request.setMethod("GET");
@@ -104,6 +91,86 @@ public class WordroidControllerTest {
         assertThat(mav.getModelMap().get("wordList"),is(List.class));
         assertThat(mav.getViewName(),is("data"));
     }
+    
+    
+    @Test
+    public void addWord() throws Exception{
+    	request.setRequestURI("/add");
+        request.setMethod("POST");
+        request.setParameter("word", "TEST");
+        request.setParameter("mean", "TEST");
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        Word actualWord = service.getWord(4);
+        assertEquals("TEST",actualWord.getWord());
+        assertEquals("TEST",actualWord.getMean());
+        
+        assertThat(mav.getViewName(),is("result"));     
+    }
+    
+    @Test
+    public void modifyWord() throws Exception{
+    	request.setRequestURI("/update/2");
+        request.setMethod("POST");
+        request.setParameter("id", "2");
+        request.setParameter("word", "TEST1234");
+        request.setParameter("mean", "뜻수정테스트");
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        Word actualWord = service.getWord(2);
+        assertEquals("TEST1234",actualWord.getWord());
+        assertEquals("뜻수정테스트",actualWord.getMean());
+        
+        assertThat(mav.getViewName(),is("result"));     
+    }
+    
+    @Test
+    public void deleteWord() throws Exception{
+    	request.setRequestURI("/delete/1");
+        request.setMethod("GET");
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+
+        Word actualWord = service.getWord(1);
+        assertEquals(actualWord,null);
+        assertThat(mav.getViewName(),is("result"));    
+    }    
+    
+    @Test
+    public void modifyWordBox() throws Exception{
+    	request.setRequestURI("/update/box/2");
+        request.setMethod("POST");
+        request.setParameter("id", "2");
+        request.setParameter("box", "3");
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        Word actualWord = service.getWord(2);
+        assertNotNull(actualWord);
+        assertEquals("3",""+actualWord.getBox());
+        assertThat(mav.getViewName(),is("result"));     
+    }
+    
+    /*
+    @Test
+    public void detailPage() throws Exception{
+    	request.setRequestURI("/board/detailpage/2");
+        request.setMethod("GET");
+
+        session.setAttribute("loginUser", new User());
+        //Board board = new Board();
+        //when(boardService.getBoard(1)).thenReturn(board);
+        
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        //verify(boardService).getBoard(1);
+        assertNotNull(mav.getModelMap().get("board"));
+        assertThat(mav.getModelMap().get("board"),is(Board.class));
+        assertThat(mav.getViewName(),is("board/detail"));        
+    }
+    */
     
     /*
     @SuppressWarnings("unchecked")

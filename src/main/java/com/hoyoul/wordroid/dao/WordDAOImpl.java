@@ -28,7 +28,7 @@ public class WordDAOImpl implements WordDAO {
 		return list;
 	}
 
-	public void addWord(Word word) {
+	public int addWord(Word word) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
@@ -36,6 +36,8 @@ public class WordDAOImpl implements WordDAO {
 		
 		session.getTransaction().commit();
 		session.close();
+		
+		return id;
 	}
 
 	public Word getWord(Integer id) {
@@ -60,7 +62,7 @@ public class WordDAOImpl implements WordDAO {
 		session.close();
 	}
 
-	public void removeWord(Integer id) {
+	public void deleteWord(Integer id) {
 		Word word = getWord(id);
 		if(null != word){
 			Session session = sessionFactory.openSession();

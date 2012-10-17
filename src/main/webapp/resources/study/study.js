@@ -3,6 +3,8 @@
   var reverse_study = false;
   var magic7_study = false;
   
+  $( "input[type=submit], a, button" ).button();
+  
   $.getJSON('./data',function(data){
     $.each(data.items,function(index,word){
       var html = '<li class="ui-state-default liststudy" mean="'+
@@ -25,6 +27,82 @@
     magic7_study = $(this).is(":checked");
   });
   
+  $('#btn_addnewcard').click(function(){
+	  //alert('Add Button works');
+	  showModal();
+	  $("#dlg_mode").val("add");
+  });
+  
+  $('#dlg_ok').click(function(e){
+  e.preventDefault();
+  
+  if($("#dlg_mode").val() == "add"){
+    
+    $("#dlg_status").text("wait...");
+      $.post(
+        "./add", 
+        $("#wordform").serialize(),
+        function(data,textStatus){
+          if(data=="OK"){
+            $("#dlg_status").hide().text("Saved sucessfully.").fadeIn('slow');
+          }else{
+            $("#dlg_status").hide().text("There is something wrong.").css("color","red").fadeIn('slow');
+          }
+          }
+      );
+      
+      $(this).hide();
+    
+  }
+  
+  if($("#dlg_mode").val() == "update"){
+    var wordid = $("#dlg_wordid").val();
+    var card = $('.ui-state-default[wordid='+wordid+']');
+    card.attr('mean',$("#dlg_mean").val());
+    card.html($("#dlg_word").val());
+    
+    //서버 데이타 호출 로직 추가.
+    $("#dlg_status").text("wait...");
+    $.post(
+      "./update/"+wordid, 
+      $("#wordform").serialize(),
+      function(data,textStatus){
+        if(data=="OK"){
+          $("#dlg_status").hide().text("Saved sucessfully.").fadeIn('slow');
+        }else{
+          $("#dlg_status").hide().text("There is something wrong.").css("color","red").fadeIn('slow');
+        }
+        }
+    );
+    
+    $(this).hide();
+  }
+      
+  });
+  
+  function showModal(){
+  $('#basic-modal-content').modal({
+    overlayClose:true,
+    onOpen: function (dialog) {
+      dialog.overlay.fadeIn('fast', function () {
+        dialog.data.hide();
+        dialog.container.fadeIn('fast', function () {
+          dialog.data.slideDown('fast');   
+        });
+      });
+    },
+    onClose: function (dialog) {
+      dialog.data.fadeOut('fast', function () {
+        dialog.container.hide('fast', function () {
+          dialog.overlay.fadeOut('fast', function () {
+            $.modal.close();
+          });
+        });
+      });
+    }
+  });
+  };
+  
   function card_flip(event){
     var card = $('.ui-state-default[wordid='+$(this).attr('wordid')+']');
     if($(this).attr('toggle') == '0'){
@@ -46,29 +124,16 @@
 
   function listclick(){
     var card = $(this);
-
+    
+    $("#dlg_title").text(card.html());
     $("#dlg_wordid").val(card.attr('wordid'));
     $("#dlg_word").val(card.html());
     $("#dlg_mean").val(card.attr('mean'));
     
-    $('#modify_dialog').dialog({
-      title: card.html(),
-      width: '400',
-      height: '280',
-      resizable : false,
-      buttons:{OK:function(){
-        var wordid = $("#dlg_wordid").val();
-        var card = $('.ui-state-default[wordid='+wordid+']');
-        card.attr('mean',$("#dlg_mean").val());
-        card.html($("#dlg_word").val());
-        
-        //서버 데이타 호출 로직 추가.
-                
-        $(this).dialog('close');
-      },Cancel:function(){
-        $(this).dialog('close');
-      }}
-    });
+    showModal();
+  
+  $("#dlg_mode").val("update");
+  
   };
 
   function init(){
@@ -157,22 +222,29 @@
                       .bind('click',listclick).hide().fadeIn('fast'));
           
           var boxobj = null;
+          var boxnum = 1;
           if($(this).attr('id') == 'yes_ans'){
-            boxobj = $("#"+(parseInt(card.attr('box'))+1)+"_box");
+        	  boxnum = (parseInt(card.attr('box'))+1);
           }else if($(this).attr('id') == 'no_ans'){
-            boxobj = $("#1_box");
+        	  boxnum = 1;
           }else{
-            boxobj = $("#6_box");
+        	  boxnum = 6;
           }
-
+          
+          boxobj = $("#"+boxnum+"_box");
           boxobj.animate({borderColor:"green"},500).animate({borderColor:"#CDCDCD"},500);
+          
+          //서버 처리.
+          var data={"box":boxnum};
+          $.post("./update/box/"+card.attr('wordid'),data,function(data){
+        	  //alert(data);
+          });
           
           card.remove();
           card = $('.ui-state-default.liststudy:first');
           $('#card').attr('wordid',card.attr('wordid'));
           
-          //서버 처리.
-          
+
         },
         tolerance: 'pointer',
         over : droppable_drop_over,

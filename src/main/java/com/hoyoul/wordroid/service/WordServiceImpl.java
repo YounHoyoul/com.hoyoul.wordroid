@@ -17,8 +17,8 @@ public class WordServiceImpl implements WordService {
 		return wordDAO.listWord();
 	}
 
-	public void addWord(Word word) {
-		wordDAO.addWord(word);
+	public int addWord(Word word) {
+		return wordDAO.addWord(word);
 	}
 
 	public Word getWord(Integer id) {
@@ -29,8 +29,8 @@ public class WordServiceImpl implements WordService {
 		wordDAO.updateWord(word);
 	}
 
-	public void removeWord(Integer id) {
-		wordDAO.removeWord(id);
+	public void deleteWord(Integer id) {
+		wordDAO.deleteWord(id);
 	}
 
 }

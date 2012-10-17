@@ -82,6 +82,4 @@ public class Word {
 	public void setDueTime(Date dueTime) {
 		this.dueTime = dueTime;
 	}
-	
-	
 }

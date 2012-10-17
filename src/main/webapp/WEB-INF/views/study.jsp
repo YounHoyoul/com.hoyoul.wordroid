@@ -12,10 +12,12 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
   <link rel="stylesheet" href="<c:url value="/resources/study/main.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/study/study.css"/>" />
-  
+  <link rel="stylesheet" href="<c:url value="/resources/dialog/basic.css"/>" />
+        
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
   <script type="text/javascript" src="<c:url value="/resources/study/study.js"/>"></script>
+  <script type="text/javascript" src="<c:url value="/resources/dialog/jquery.simplemodal.js"/>"></script>
   
 </head>
 <body>
@@ -38,6 +40,8 @@
         <div id="option_frame">
           <input type="checkbox" id="reverse_study" name="reverse">Reverse</input>
           <input type="checkbox" id="magic7_study" name="reverse">Magic7</input>
+          
+          
         </div>
         
         <div id="card_frame">
@@ -70,22 +74,43 @@
             </tr>
           </table>
         </div>
-        <ul class='box' id="card_box" style="display:none;"></ul>
-        <div id="modify_dialog" style="display:none;">
-          <input type="hidden" id="dlg_wordid" name="wordid" value=""/>
-          <table>
-            <tr>
-              <td>Word :</td>
-              <td><input type="text" id="dlg_word" name="word" value="" size="30"/></td>
-            </tr>
-            <tr>
-              <td>Mean :</td>
-              <td><textarea id="dlg_mean" name="mean" cols="30" rows="5"></textarea></td>
-            </tr>
-          </table>
+        <div id="button_frame">
+            <button id="btn_addnewcard">Add New Card</button>
         </div>
+        
+        <ul class='box' id="card_box" style="display:none;"></ul>
+        
+        <!-- modal content -->
+        <div id="basic-modal-content">
+            <h3 id="dlg_title"></h3>
+            <form name='wordform' id="wordform">
+				<input type="hidden" id="dlg_wordid" name="wordid" value=""/>
+				<input type="hidden" id="dlg_mode" name="mode" value=""/>
+				<table>
+			    <tr>
+			      <td>Word :</td>
+			      <td><input type="text" id="dlg_word" name="word" value="" style="width:300px;"/></td>
+			    </tr>
+			    <tr>
+			      <td>Mean :</td>
+			      <td><textarea id="dlg_mean" name="mean" cols="30" rows="5" style="width:300px;"></textarea></td>
+			    </tr>
+			    <tr>
+	              <td colspan="2">
+	                <button id="dlg_ok">OK</button>
+	                <!-- <button id="dlg_cancel">Cancel</button> -->
+	                <h3 id="dlg_status"></h3>
+	                
+	              </td>
+	            </tr>
+				</table>
+			</form>
+        </div>
+             
+        
       </article>    
     </section>
+
     
     <aside id="side_news">
       <h4>News</h4>
