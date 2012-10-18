@@ -2,14 +2,17 @@ package com.hoyoul.wordroid.dto;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="WordroidWord")
+@Table(name="WR_WORD")
 public class Word {
 	@Id
 	@GeneratedValue
@@ -26,13 +29,29 @@ public class Word {
 	@Column(name="DUETIME")
 	private Date dueTime;
 	
-	public Word(){
-		
-	}
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="WORDSETID")
+	private Wordset wordset;
+
+	public Word(){}
 	
 	public Word(String word, String mean) {
 		this.word = word;
 		this.mean = mean;
+	}
+	
+	public Word(Wordset wordset, String word, String mean){
+		this.wordset = wordset;
+		this.word = word;
+		this.mean = mean;
+	}
+	
+	public Wordset getWordset() {
+		return wordset;
+	}
+
+	public void setWordset(Wordset wordset) {
+		this.wordset = wordset;
 	}
 
 	public Integer getId() {

@@ -14,7 +14,9 @@
     <definition name="result" extends="base.plain">
         <put-attribute name="body" value="/WEB-INF/views/result.jsp"/>
     </definition>
-    
+    <definition name="main/check" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/main/check.jsp"/>
+    </definition>    
 </tiles-definitions>
 
 

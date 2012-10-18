@@ -13,22 +13,27 @@ public class WordServiceImpl implements WordService {
 	@Autowired
 	private WordDAO wordDAO;
 	
+	@Override
 	public List<Word> listWord() {
 		return wordDAO.listWord();
 	}
 
+	@Override
 	public int addWord(Word word) {
 		return wordDAO.addWord(word);
 	}
 
+	@Override
 	public Word getWord(Integer id) {
 		return wordDAO.getWord(id);
 	}
 
+	@Override
 	public void updateWord(Word word) {
 		wordDAO.updateWord(word);
 	}
 
+	@Override
 	public void deleteWord(Integer id) {
 		wordDAO.deleteWord(id);
 	}

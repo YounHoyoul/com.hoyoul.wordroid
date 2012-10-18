@@ -27,6 +27,7 @@
         <beans:property name="definitions">
             <beans:list>
                 <beans:value>/WEB-INF/tiles/tiles-complex.xml</beans:value>
+                <beans:value>/WEB-INF/tiles/tiles-simple.xml</beans:value>
                 <beans:value>/WEB-INF/tiles/tiles-plain.xml</beans:value>
             </beans:list>
         </beans:property>
@@ -67,7 +68,7 @@
         </beans:property>
     </beans:bean>
     
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="sessionFactory" />
     </beans:bean>

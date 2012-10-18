@@ -1,1 +1,5 @@
-alert('1');
+$(document).ready(function(){
+	
+	//alert("JQuery works.");
+	
+});
