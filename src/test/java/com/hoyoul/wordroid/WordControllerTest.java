@@ -17,20 +17,20 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
-import com.hoyoul.wordroid.controller.WordroidController;
+import com.hoyoul.wordroid.controller.WordController;
 import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.service.WordService;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration("servlet-context.xml")
-public class WordroidControllerTest {
+public class WordControllerTest {
 	private MockHttpServletRequest request;
     private MockHttpServletResponse response;
     private MockHttpSession session;
     private AnnotationMethodHandlerAdapter adapter;
 
     @InjectMocks
-    private static WordroidController controller;
+    private static WordController controller;
     
     @Mock
     private static WordService service;
@@ -52,7 +52,7 @@ public class WordroidControllerTest {
 		context = new ClassPathXmlApplicationContext("servlet-context.xml");
 		
 		//SessionFactory session=context.getBean("sessionFactory",SessionFactory.class);
-		controller = context.getBean("wordroidController",WordroidController.class);
+		controller = context.getBean("wordroidController",WordController.class);
 		service = context.getBean("wordServiceImpl",WordService.class);
 		
 		service.addWord(new Word("She's got her father's eyes","개 눈은 아빠랑 닮았어"));

@@ -27,6 +27,7 @@
         <beans:property name="definitions">
             <beans:list>
                 <beans:value>/WEB-INF/tiles/tiles-complex.xml</beans:value>
+                <beans:value>/WEB-INF/tiles/tiles-simple.xml</beans:value>
                 <beans:value>/WEB-INF/tiles/tiles-plain.xml</beans:value>
             </beans:list>
         </beans:property>

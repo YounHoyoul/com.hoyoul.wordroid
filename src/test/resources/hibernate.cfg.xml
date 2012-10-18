@@ -7,6 +7,8 @@
     <session-factory>
         <mapping class="com.hoyoul.wordroid.dto.Word" />
         <mapping class="com.hoyoul.wordroid.dto.Wordset" />
+        <mapping class="com.hoyoul.wordroid.dto.Folder" />
+        <mapping class="com.hoyoul.wordroid.dto.User" />        
     </session-factory>
          
 </hibernate-configuration>

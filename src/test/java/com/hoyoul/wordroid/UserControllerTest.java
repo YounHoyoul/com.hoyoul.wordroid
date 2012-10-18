@@ -22,9 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter;
 
 import com.hoyoul.wordroid.controller.UserController;
-import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.dto.User;
-import com.hoyoul.wordroid.service.WordService;
 import com.hoyoul.wordroid.service.UserService;
 
 public class UserControllerTest {
@@ -59,31 +57,9 @@ public class UserControllerTest {
 		controller = context.getBean("userController",UserController.class);
 		service = context.getBean("userServiceImpl",UserService.class);
 		
-		/*
-		service.addUser(new User("",""));
-		service.addUser(new User("Second User","Second User Description"));
 
-		User wordset = service.getUser(1);
-		
-		Word word1 = new Word(wordset,"She's got her father's eyes","개 눈은 아빠랑 닮았어");
-		Word word2 = new Word(wordset,"I'm going to the English class!","영어학원 가려구요");
-		Word word3 = new Word(wordset,"My feet are killing me","다리가 너무 아파");
-		
-		WordService wordService = context.getBean("wordServiceImpl",WordService.class);
-		wordService.addWord(word1);
-		word1 = wordService.getWord(1);
-		
-		wordset.getWords().add(word1);
-		wordset.getWords().add(word2);
-		wordset.getWords().add(word3);
-
-		word1.setUser(wordset);
-		word2.setUser(wordset);
-		word3.setUser(wordset);
-		
-		service.updateUser(wordset);
-		*/
-		
+		service.addUser(new User("First Name","First LoginID","First Password","First Email"));
+		service.addUser(new User("Second Name","Second LoginID","Second Password","Second Email"));
     }
     
     @Test

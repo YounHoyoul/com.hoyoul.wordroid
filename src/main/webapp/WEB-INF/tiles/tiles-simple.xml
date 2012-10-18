@@ -1,0 +1,22 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <definition name="base.simple" template="/WEB-INF/template/layout_simple.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body"   value="/WEB-INF/template/body.jsp"/>
+    </definition>
+    
+    <definition name="main/login" extends="base.simple">
+        <put-attribute name="body" value="/WEB-INF/views/main/login.jsp"/>
+    </definition>
+
+    <definition name="main/join" extends="base.simple">
+        <put-attribute name="body" value="/WEB-INF/views/main/join.jsp"/>
+    </definition>
+</tiles-definitions>
+
+
+

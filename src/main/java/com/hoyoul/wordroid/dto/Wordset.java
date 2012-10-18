@@ -1,5 +1,6 @@
 package com.hoyoul.wordroid.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -31,7 +32,7 @@ public class Wordset {
 	private Boolean magic7;
 	
 	@OneToMany(mappedBy="wordset",fetch=FetchType.EAGER)
-	private List<Word> words;
+	private List<Word> words = new ArrayList<Word>();
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="USERID")

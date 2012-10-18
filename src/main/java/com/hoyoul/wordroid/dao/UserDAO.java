@@ -10,4 +10,5 @@ public interface UserDAO {
 	public User getUser(Integer id);
 	public void updateUser(User user);
 	public void deleteUser(Integer id);
+	public User getUserByLoginId(String loginId);
 }

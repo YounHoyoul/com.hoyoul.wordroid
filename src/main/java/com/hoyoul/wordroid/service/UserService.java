@@ -13,6 +13,7 @@ public interface UserService {
 
 	public List<User> listUser();
 	public User getUser(Integer id);
+	public User getUserByLoginId(String loginId);
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public int addUser(User user);	
@@ -20,5 +21,6 @@ public interface UserService {
 	public void updateUser(User user);
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void deleteUser(Integer id);
+	
 
 }

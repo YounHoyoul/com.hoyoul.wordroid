@@ -1,5 +1,6 @@
 package com.hoyoul.wordroid.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,11 +28,20 @@ public class User {
 	@Column(name="EMAIL")
 	private String email;
 	
-	@OneToMany(mappedBy="user",fetch=FetchType.EAGER)
-	private List<Wordset> wordsets;
+	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
+	private List<Wordset> wordsets = new ArrayList<Wordset>();
 	
-	@OneToMany(mappedBy="user",fetch=FetchType.EAGER)
-	private List<Folder> folders;
+	@OneToMany(mappedBy="folderUser",fetch=FetchType.EAGER)
+	private List<Folder> folders = new ArrayList<Folder>();;
+
+	public User(){}
+	
+	public User(String name,String loginId,String password,String email){
+		this.name=name;
+		this.loginId=loginId;
+		this.password=password;
+		this.email=email;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -69,6 +79,10 @@ public class User {
 	public void setWordsets(List<Wordset> wordsets) {
 		this.wordsets = wordsets;
 	}
-
-	
+	public List<Folder> getFolders() {
+		return folders;
+	}
+	public void setFolders(List<Folder> folders) {
+		this.folders = folders;
+	}
 }

@@ -10,14 +10,15 @@
     <title>Wordroid's Website</title>
     
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-  <link rel="stylesheet" href="<c:url value="/resources/study/main.css"/>" />
-  <link rel="stylesheet" href="<c:url value="/resources/study/study.css"/>" />
+  <link rel="stylesheet" href="<c:url value="/resources/common.css"/>" />
   <link rel="stylesheet" href="<c:url value="/resources/dialog/basic.css"/>" />
-        
+          
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
   <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-  <script type="text/javascript" src="<c:url value="/resources/study/study.js"/>"></script>
   <script type="text/javascript" src="<c:url value="/resources/dialog/jquery.simplemodal.js"/>"></script>
+  
+  <link rel="stylesheet" href="<c:url value="/resources/study/study.css"/>" />
+  <script type="text/javascript" src="<c:url value="/resources/study/study.js"/>"></script>
   
 </head>
 <body>

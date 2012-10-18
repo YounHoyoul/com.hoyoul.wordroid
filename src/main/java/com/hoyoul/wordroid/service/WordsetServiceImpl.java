@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.hoyoul.wordroid.dao.WordDAO;
 import com.hoyoul.wordroid.dao.WordsetDAO;
+import com.hoyoul.wordroid.dto.Folder;
+import com.hoyoul.wordroid.dto.User;
 import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.dto.Wordset;
 
@@ -53,6 +55,16 @@ public class WordsetServiceImpl implements WordsetService {
 	@Override
 	public void deleteWordset(Integer id) {
 		wordsetDAO.deleteWordset(id);
+	}
+
+	@Override
+	public List<Wordset> listWordsetByUserRoot(User user) {
+		return wordsetDAO.listWordsetByUserRoot(user);
+	}
+
+	@Override
+	public List<Wordset> listWordsetByFolder(Folder folder) {
+		return wordsetDAO.listWordsetByFolder(folder);
 	}
 
 }

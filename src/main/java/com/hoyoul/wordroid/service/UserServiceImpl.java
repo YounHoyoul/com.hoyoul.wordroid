@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.hoyoul.wordroid.dao.WordDAO;
 import com.hoyoul.wordroid.dao.UserDAO;
-import com.hoyoul.wordroid.dto.Word;
 import com.hoyoul.wordroid.dto.User;
 
 @Service
@@ -42,6 +41,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUser(Integer id) {
 		userDAO.deleteUser(id);
+	}
+
+	@Override
+	public User getUserByLoginId(String loginId) {
+		return userDAO.getUserByLoginId(loginId);
 	}
 
 }

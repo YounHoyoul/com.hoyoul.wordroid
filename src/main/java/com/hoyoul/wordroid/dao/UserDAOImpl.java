@@ -2,6 +2,7 @@ package com.hoyoul.wordroid.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,25 @@ public class UserDAOImpl implements UserDAO {
 		if(null != user){
 			sessionFactory.getCurrentSession().delete(user);
 		}
+	}
+
+	@Override
+	public User getUserByLoginId(String loginId) {
+		
+		if(loginId == null) return null;
+		
+		String hql = "from User e where e.loginId = :loginId";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("loginId", loginId);
+		
+		@SuppressWarnings("unchecked")
+		List<User> list = query.list();
+		
+		if(list.size() == 0){
+			return null;
+		}
+	
+		return list.get(0);
 	}
 
 }

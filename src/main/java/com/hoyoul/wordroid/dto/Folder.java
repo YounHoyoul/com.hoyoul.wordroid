@@ -1,5 +1,6 @@
 package com.hoyoul.wordroid.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,21 +24,31 @@ public class Folder {
 	@Column(name="NAME")
 	private String name;
 	@Column(name="DESCRIPTION")
+	private String description;
 	
 	@OneToMany(mappedBy="folder",fetch=FetchType.LAZY)
-	private List<Wordset> wordsets;
+	private List<Wordset> wordsets = new ArrayList<Wordset>();
 	
 	@ManyToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="USERID")
-	private User user;
+	private User folderUser;
 
 	@ManyToOne(cascade={CascadeType.ALL})
     @JoinColumn(name="PARENT_FOLDERID")
 	private Folder parentFolder;
 	
 	@OneToMany(mappedBy="parentFolder",fetch=FetchType.LAZY)
-	private List<Folder> childrenFolder;
+	private List<Folder> childrenFolder = new ArrayList<Folder>();
 	
+	public Folder(){
+		
+	}
+	
+	public Folder(String name, String description) {
+		this.name=name;
+		this.description=description;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -62,12 +73,12 @@ public class Folder {
 		this.wordsets = wordsets;
 	}
 
-	public User getUser() {
-		return user;
+	public User getFolderUser() {
+		return folderUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setFolderUser(User user) {
+		this.folderUser = user;
 	}
 
 	public Folder getParentFolder() {
@@ -85,5 +96,11 @@ public class Folder {
 	public void setChildrenFolder(List<Folder> childrenFolder) {
 		this.childrenFolder = childrenFolder;
 	}
-	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}	
 }
