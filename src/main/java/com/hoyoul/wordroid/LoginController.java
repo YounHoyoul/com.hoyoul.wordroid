@@ -58,7 +58,7 @@ public class LoginController {
 	}
 	
 	//JOIN CONTROL
-	@RequestMapping(value="/joinpage",method=RequestMethod.GET)
+	@RequestMapping(value="/main/joinpage",method=RequestMethod.GET)
 	public String joinPage(Model model){
 		
 		model.addAttribute("user", new User());
@@ -67,10 +67,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/main/join",method=RequestMethod.POST)
-	public String join(@ModelAttribute("user") User user,
+	public String join(@ModelAttribute("user") User user,Model model,
 			HttpServletRequest request){
 		
 		int id = userService.addUser(user);
+		
+		model.addAttribute("userId", id);
 		
 		return "redirect:/";
 	}

@@ -46,9 +46,9 @@ public class MainController {
 			return "redirect:/";
 		}
 		
-		model.addAttribute("folderList", folderService.listFolderByUserRoot(loginUser));
-		model.addAttribute("wordsetList", wordsetService.listWordsetByUserRoot(loginUser));
-		model.addAttribute("user", loginUser);
+		//model.addAttribute("folderList", folderService.listFolderByUserRoot(loginUser));
+		//model.addAttribute("wordsetList", wordsetService.listWordsetByUserRoot(loginUser));
+		//model.addAttribute("user", loginUser);
 		
 		return "index";
 	}	
@@ -60,6 +60,10 @@ public class MainController {
 		
 		HttpSession session = request.getSession();
 		User loginUser = (User) session.getAttribute("loginUser");
+		
+		if(loginUser == null){
+			return "main/data";
+		}
 		
 		model.addAttribute("folderList", folderService.listFolderByUserRoot(loginUser));
 		model.addAttribute("wordsetList", wordsetService.listWordsetByUserRoot(loginUser));
