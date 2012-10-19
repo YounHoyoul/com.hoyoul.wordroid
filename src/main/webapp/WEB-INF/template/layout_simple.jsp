@@ -9,14 +9,18 @@
     <meta charset="utf-8" />
     <title>Wordroid's Website</title>
     
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-  <link rel="stylesheet" href="<c:url value="/resources/common.css"/>" />
-        
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
-  <script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-  <script type="text/javascript" src="<c:url value="/resources/dialog/jquery.simplemodal.js"/>"></script>
-  <script type="text/javascript" src="<c:url value="/resources/common.js"/>"></script>
-  
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/easyui/themes/default/easyui.css"/>" />  
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/easyui/themes/icon.css"/>" /> 
+	<script type="text/javascript" src="<c:url value="/resources/easyui/jquery.easyui.min.js"/>"></script>
+    
+	<link rel="stylesheet" href="<c:url value="/resources/dialog/basic.css"/>" />
+	<script type="text/javascript" src="<c:url value="/resources/dialog/jquery.simplemodal.js"/>"></script>
+  	
+  	<link rel="stylesheet" href="<c:url value="/resources/common.css"/>" />
 </head>
 <body>
     <div id="simple_wrapper">

@@ -67,22 +67,23 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/main/join",method=RequestMethod.POST)
-	public String join(@ModelAttribute("user") User user){
+	public String join(@ModelAttribute("user") User user,
+			HttpServletRequest request){
 		
 		int id = userService.addUser(user);
 		
-		return "main/login";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/main/check/{loginId}",method=RequestMethod.GET)
 	public String checkLoginId(@PathVariable("loginId") String loginId,
-			Model model){
+			Model model,HttpServletRequest request){
 		
 		User user = userService.getUserByLoginId(loginId);
 		if(user != null){
 			model.addAttribute("result", "occupied already");
 		}else{
-			model.addAttribute("result", "");
+			model.addAttribute("result", "true");
 		}
 		
 		return "main/check";

@@ -11,9 +11,54 @@
 </style>
 <script>
 $(document).ready(function(){
-	$("#submit").button();
+	/*
+	$("#loginid").keyup(function(){
+		$.get("./main/check/"+$(this).val(),function(data){
+			if(data != ""){
+				$("#loginid_error").html('<span class="error">'+data+'</span>');
+			}
+		});
+	});
+	*/
+	
+	$.extend($.fn.validatebox.defaults.rules, {  
+	    duplicate: {  
+	        validator: function(value,param){
+	        	var returnVal = $.ajax({	
+			        				url:"./main/check/"+value,
+									async:false,
+									cache:false,
+									type:"GET"
+								}).responseText;
+	        	
+	        	return returnVal.trim() == "true";
+	        },  
+	        message: 'This user ID is already occupied.'  
+	    }  
+	}); 
+
+	/*
+	$("#loginid").blur(function(){
+		var returnVal=$.ajax({
+			url:"./main/check/"+$(this).val(),
+    		async:false,
+    		cache:false,
+    		type:"GET"
+    	}).responseText;
+		
+		alert(returnVal);
+	});
+	*/
+	
+	$("#btn_submit").click(function(){
+		$("#joinform").trigger("submit");
+	});	
+	
 	$("#joinform").submit(function(){
 		
+		return $(this).form('validate');
+		
+		/*
 		$(".error").hide();
 		
 		var hasError = false;
@@ -59,25 +104,29 @@ $(document).ready(function(){
 		}else if(!emailReg.test(emailaddressVal)) {
 			$("#email_error").html('<span class="error">Enter a valid email address.</span>');
 			hasError = true;
-		}/* else if(!emailblockReg.test(emailaddressVal)) {
+		}else if(!emailblockReg.test(emailaddressVal)) {
 			$("#email_error").html('<span class="error">No yahoo, gmail or hotmail emails.</span>');
 			hasError = true;
-		} */ 
+		} 
 		
 		if(hasError == true) { return false; }
-	});
-	
-	$("#loginid").keyup(function(){
-		$.get("./main/check/"+$(this).val(),function(data){
-			if(data != ""){
-				$("#loginid_error").html('<span class="error">'+data+'</span>');
-			}
-		});
+		*/
 	});
 	
 	$('#password').keyup(function(){
 		$('#result').html(checkStrength($('#password').val()));
 	});
+	
+
+	
+	$.extend($.fn.validatebox.defaults.rules, {  
+	    equals: {  
+	        validator: function(value,param){  
+	            return value == $(param[0]).val();  
+	        },  
+	        message: 'Field do not match.'  
+	    }  
+	}); 
 	
 	function checkStrength(password){
 		 
@@ -88,7 +137,7 @@ $(document).ready(function(){
 		if (password.length < 6) {
 			$('#result').removeClass();
 			$('#result').addClass('short');
-			return 'Too short';
+			return 'short';
 		}
 	 
 		//length is ok, lets continue.
@@ -127,39 +176,40 @@ $(document).ready(function(){
 	}
 });
 </script>
-
-<form:form id="joinform" method="post" action="main/join" commandName="user">
-<table>
-	<tr>
-		<td align="right"><form:label path="loginId"> *Login ID </form:label> </td>
-		<td><form:input path="loginId" id="loginid"/> </td>
-		<td id="loginid_error" align="left"></td>
-	<tr>
-	<tr>
-		<td align="right"><form:label path="password"> *Password </form:label> </td>
-		<td><form:input path="password" id="password" type="password"/></td>
-		<td><span id="result" class="error"></span></td>
-		<td id="password_error" align="left"></td>
-	<tr>
-	<tr>
-		<td align="right">Confirm Password</td>
-		<td><input type="password" id="password-check"/></td>
-		<td id="password-check_error" align="left" colspan="2"></td>
-	<tr>	
-	<tr>
-		<td align="right"><form:label path="name"> *Name </form:label> </td>
-		<td><form:input path="name" id="username"/> </td>
-		<td id="username_error" align="left" colspan="2"></td>
-	<tr>
-	<tr>
-		<td align="right"><form:label path="email"> *Email </form:label> </td>
-		<td><form:input path="email" id="email"/></td>
-		<td id="email_error" align="left" colspan="2"></td>
-	<tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input id="submit" type="submit" value="Join" />
-		</td>
-	</tr>		
-</table>	
-</form:form>
+<div class="easyui-panel" title="Join Form" style="width:350px;background:#fafafa;padding:10px;">
+	<form:form id="joinform" method="post" action="main/join">
+	<table>
+		<tr>
+			<td align="right">*Login ID </td>
+			<td><input type="text" name="loginId" id="loginid" class="easyui-validatebox" required="true" validType="duplicate"/> </td>
+			<td id="loginid_error" align="left"></td>
+		<tr>
+		<tr>
+			<td align="right"> *Password </td>
+			<td><input type="password" name="password" id="password" class="easyui-validatebox" required="true" validType="length[4,12]"/></td>
+			<td><span id="result" class="error" style="text-align:left"></span></td>
+			<td id="password_error" align="left"></td>
+		<tr>
+		<tr>
+			<td align="right">Confirm Password</td>
+			<td><input type="password" id="password-check" class="easyui-validatebox" required="true" validType="equals['#password']" /></td>
+			<td id="password-check_error" align="left" colspan="2"></td>
+		<tr>	
+		<tr>
+			<td align="right"> *Name </td>
+			<td><input type="text" name="name" id="username" class="easyui-validatebox" required="true"/> </td>
+			<td id="username_error" align="left" colspan="2"></td>
+		<tr>
+		<tr>
+			<td align="right"> *Email </td>
+			<td><input type="text" name="email" id="email" class="easyui-validatebox" required="true" validType="email"/></td>
+			<td id="email_error" align="left" colspan="2"></td>
+		<tr>
+		<tr>
+			<td colspan="2" align="center">
+				<a href="javascript:void(0)" id="btn_submit" class="easyui-linkbutton">Join</a>
+			</td>
+		</tr>		
+	</table>	
+	</form:form>
+</div>

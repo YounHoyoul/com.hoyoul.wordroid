@@ -4,16 +4,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script>
 $(document).ready(function(){
-	$("#join").click(function(){
+	$("#btn_join").click(function(){
 		document.location.href="joinpage";
+	});
+	
+	$("#btn_submit").click(function(){
+		$("#loginform").trigger("submit");
 	});
 	
 	$("#loginform").submit(function(){
 		
+		return $(this).form('validate');
+		
+		/*
 		$(".error").hide();
 		var hasError = false;
 		
-		var email = $("#loginid").val();
+		var loginid = $("#loginid").val();
 		if(loginid == ''){
 			hasError = true;
 			$("#loginid_error").html("<span class='error'>please enter your login ID</span>");
@@ -26,32 +33,50 @@ $(document).ready(function(){
 		}
 		
 		return !hasError;
+		*/
+		
 	});
+	
+	/*
+	$('#loginform').form({
+		onSubmit:function(){
+			return $(this).form('validate');
+		},
+		success:function(data){
+			$.messager.alert('Info', data, 'info');
+		}
+	});
+	*/
+	
 });
 
+/*
 $(document).ready(function(){
-	$("#submit,#join").button();
+	$("#submit,#btn_join").button();
 });
+*/
 </script>
 <style>
 </style>
-<form:form id="loginform" method="post" action="main/login" commandName="user">
-<table>
-	<tr>
-		<td align="right"><form:label path="loginId">Login ID</form:label></td>
-		<td><form:input path="loginId" id="loginid"/></td>
-		<td id="loginid_error" align="left"></td>
-	</tr>
-	<tr>
-		<td align="right"><form:label path="password">Password</form:label></td>
-		<td><form:input path="password" id="password" type="password"/></td>
-		<td id="password_error" align="left"></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input id="submit" type="submit" value="Sing up" />
-			<input id="join" type="button" value="Join" />
-		</td>
-	</tr>
-</table>
-</form:form>
+<div class="easyui-panel" title="Sign-up Form" style="width:300px;background:#fafafa;padding:30px;">
+	<form:form id="loginform" method="post" action="main/login" commandName="user">
+	<table>
+		<tr>
+			<td align="right"><form:label path="loginId">Login ID</form:label></td>
+			<td><form:input path="loginId" id="loginid" class="easyui-validatebox" required="true"/></td>
+			<td id="loginid_error" align="left"></td>
+		</tr>
+		<tr>
+			<td align="right"><form:label path="password">Password</form:label></td>
+			<td><form:input path="password" id="password" type="password" class="easyui-validatebox" required="true"/></td>
+			<td id="password_error" align="left"></td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center">
+				<a href="javascript:void(0)" id="btn_submit" class="easyui-linkbutton">Sing up</a>
+				<a href="javascript:void(0)" id="btn_join" class="easyui-linkbutton">Join</a>
+			</td>
+		</tr>
+	</table>
+	</form:form>
+</div>	

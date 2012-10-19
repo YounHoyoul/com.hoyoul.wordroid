@@ -29,6 +29,7 @@
 - Checking validation of new user id through Ajax.
 - Showing error message by JQuery.
 - Showing the strength of the password as the user inputs by jQuery.
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/join.png?raw=true">
 
 ##User's Module
 - Completed front end module(CRUDL) through Ajax with the datagrid of JQuery plugin "jEasyUI".
