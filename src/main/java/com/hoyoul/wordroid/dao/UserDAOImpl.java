@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.gson.JsonElement;
 import com.hoyoul.wordroid.dto.User;
 
 @Repository
@@ -20,6 +21,23 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> listUser() {
 		return sessionFactory.getCurrentSession().createQuery("from User").list();
 	}	
+	
+	@Override
+	public List<User> listUserByPage(int page, int rows) {
+		
+		Query query = sessionFactory.getCurrentSession().createQuery("from User");
+		query.setFirstResult((page-1)*rows);
+		query.setMaxResults(rows);
+		
+		return query.list();
+	}
+	
+	@Override
+	public Long listUserCount() {
+		Query q = sessionFactory.getCurrentSession().createQuery("select count(*) from User");
+        Long count = (Long) q.uniqueResult();
+        return count;
+	}
 	
 	@Override
 	public int addUser(User user) {
@@ -62,5 +80,9 @@ public class UserDAOImpl implements UserDAO {
 	
 		return list.get(0);
 	}
+
+
+
+
 
 }

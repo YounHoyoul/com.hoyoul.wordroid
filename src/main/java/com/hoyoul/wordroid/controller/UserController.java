@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 import com.hoyoul.wordroid.HomeController;
+import com.hoyoul.wordroid.dto.ReturnData;
 import com.hoyoul.wordroid.dto.User;
 import com.hoyoul.wordroid.service.UserService;
 
@@ -39,11 +40,28 @@ public class UserController {
 	@RequestMapping(value="/user/data",method=RequestMethod.GET)
 	public String list(Model model,HttpServletRequest request){
 
-		model.addAttribute("data", (new Gson()).toJson(userService.listUser()));
+		int page = 1;
+		int rows = 10;
+		
+		if(request.getParameter("page") != null && !"".equals(request.getParameter("page"))){
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		if(request.getParameter("rows") != null && !"".equals(request.getParameter("rows"))){
+			rows = Integer.parseInt(request.getParameter("rows"));
+		}
+		
+		ReturnData returnData = new ReturnData();
+		returnData.setTotal(userService.listUserCount());
+		returnData.setRows(userService.listUserByPage(page,rows));
+		
+		logger.info((new Gson()).toJson(returnData));
+		
+		model.addAttribute("data", (new Gson()).toJson(returnData));
 		
 		return "jsondata";
 	}
 	
+	/*
 	@RequestMapping(value="/user/detail/{userId}",method=RequestMethod.GET)
 	public String detailPage(@PathVariable("userId") Integer userId,Model model){
 		
@@ -59,28 +77,43 @@ public class UserController {
 		
 		return "user/modify";
 	}
+	*/
 	
 	@RequestMapping(value="/user/add",method=RequestMethod.POST)
-	public String add(@ModelAttribute("user") User user,Model model){
+	public String add(@ModelAttribute("user") User user,Model model,HttpServletRequest request){
 		
 		userService.addUser(user);
 		
-		return "redirect:/user/list";
+		model.addAttribute("data", "{}");
+		
+		return "jsondata";
+		
+		//return "redirect:/user/list";
 	}
 	
 	@RequestMapping(value="/user/update/{userId}",method=RequestMethod.POST)
-	public String update(@ModelAttribute("user") User user,Model model){
+	public String update(@PathVariable("userId") Integer userId,
+			@ModelAttribute("user") User user,Model model,HttpServletRequest request){
 		
+		user.setId(userId);
 		userService.updateUser(user);
 		
-		return "redirect:/user/updatepage/"+user.getId();
+		model.addAttribute("data", "{}");
+		
+		return "jsondata";
+		
+		//return "redirect:/user/updatepage/"+user.getId();
 	}
 	
 	@RequestMapping(value="/user/delete/{userId}",method=RequestMethod.GET)
-	public String delete(@PathVariable("userId") Integer userId,Model model){
+	public String delete(@PathVariable("userId") Integer userId,Model model,HttpServletRequest request){
 		
 		userService.deleteUser(userId);
 		
-		return "redirect:/user/list";
+		model.addAttribute("data", "{}");
+		
+		return "jsondata";
+		
+		//return "redirect:/user/list";
 	}
 }
