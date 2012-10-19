@@ -38,7 +38,7 @@ header,section,footer,aside,nav,article,hgroup{
 	padding: 20px;
 }
 #top_menu{
-	background: blue;
+	background: #f0f0f0;
 	color: white;
 }
 #top_menu li{

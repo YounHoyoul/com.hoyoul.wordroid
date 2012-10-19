@@ -78,11 +78,24 @@
 	<beans:bean id="logging" class="com.hoyoul.wordroid.LoggingAspect" >
 	</beans:bean>
 	
+	<beans:bean id="security" class="com.hoyoul.wordroid.SecurityAspect" >
+	</beans:bean>
+	
 	<aop:config>
         <aop:aspect id="loggingAspect" ref="logging">
             <aop:pointcut id="loggingPointCut"
-                expression="execution(* com.hoyoul.wordroid.controller.*Controller*.*(..))" />
+                expression="execution(* com.hoyoul.wordroid.*.*Controller*.*(..))" />
             <aop:around pointcut-ref="loggingPointCut" method="log" />
+        </aop:aspect>
+        <aop:aspect id="loggingAspect2" ref="logging">
+            <aop:pointcut id="loggingPointCut2"
+                expression="execution(* com.hoyoul.wordroid.*.*(..))" />
+            <aop:around pointcut-ref="loggingPointCut2" method="log" />
+        </aop:aspect>
+        <aop:aspect id="securityAspect" ref="security">
+            <aop:pointcut id="securityPointCut"
+                expression="execution(* com.hoyoul.wordroid.controller.*Controller*.*(..))" />
+            <aop:around pointcut-ref="securityPointCut" method="checkAuth" />
         </aop:aspect>
     </aop:config>
     

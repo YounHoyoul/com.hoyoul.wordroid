@@ -16,7 +16,7 @@ public class LoggingAspect {
         logger.info("###Entering method :" + call.toShortString());
         
 		Object [] objs = call.getArgs();
-		
+		boolean isReqestFound = false;
 		for(Object obj : objs){
 			if(obj instanceof HttpServletRequest){
 				HttpServletRequest request = (HttpServletRequest)obj;
@@ -30,11 +30,17 @@ public class LoggingAspect {
 					logger.info(name+'='+value);
 				}
 				
+				isReqestFound = true;
+				
 				break;
 			}
 		}
 		
         Object point = call.proceed();
+        
+        if(isReqestFound){
+        	logger.info("return => " + point);
+        }
         
         logger.info("###Exiting method : " + call.toShortString());
 

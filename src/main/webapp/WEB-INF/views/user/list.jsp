@@ -9,7 +9,7 @@ article{
 	border: 1px solid red;
 	padding: 20px;
 	margin-bottom: 15px;
-	height: 250px;
+	height: 350px;
 }
 #fm{  
     margin:0;  
@@ -124,7 +124,7 @@ $(document).ready(function(){
 </script>
 
 <article>
-	<table id="dg" style="width:620px;height:250px" ></table>
+	<table id="dg" style="width:620px;height:350px" ></table>
 	 
     <div id="toolbar">  
         <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" >New User</a>  

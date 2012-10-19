@@ -34,30 +34,6 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	//LOGIN CONTROL
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String index(Model model){
-		
-		model.addAttribute("user", new User());
-		
-		return "main/login";
-	}
-	
-	@RequestMapping(value="/main/login",method=RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user,
-			HttpServletRequest request
-			){
-		
-		User queryUser = userService.getUserByLoginId(user.getLoginId());
-		
-		if(queryUser != null && queryUser.getPassword().equals(user.getPassword())){
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", queryUser);
-			return "redirect:/main";
-		}
-		
-		return "redirect:/";
-	}
-	
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String main(Model model,
 			HttpServletRequest request
@@ -92,34 +68,5 @@ public class MainController {
 		return "main/data";
 	}
 	
-	//JOIN CONTROL
-	@RequestMapping(value="/joinpage",method=RequestMethod.GET)
-	public String joinPage(Model model){
-		
-		model.addAttribute("user", new User());
-		
-		return "main/join";
-	}
-	
-	@RequestMapping(value="/main/join",method=RequestMethod.POST)
-	public String join(@ModelAttribute("user") User user){
-		
-		int id = userService.addUser(user);
-		
-		return "main/login";
-	}
-	
-	@RequestMapping(value="/main/check/{loginId}",method=RequestMethod.GET)
-	public String checkLoginId(@PathVariable("loginId") String loginId,
-			Model model){
-		
-		User user = userService.getUserByLoginId(loginId);
-		if(user != null){
-			model.addAttribute("result", "occupied already");
-		}else{
-			model.addAttribute("result", "");
-		}
-		
-		return "main/check";
-	}
+
 }
