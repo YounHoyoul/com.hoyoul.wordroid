@@ -37,7 +37,7 @@
 - Paging and completed stress test.
 - Searching by name.
 <br>
-<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png">
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png?raw=true">
 
 ##Card Set and Folder's Module
 
