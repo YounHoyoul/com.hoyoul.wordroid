@@ -17,6 +17,8 @@ public interface UserService {
 	public User getUserByLoginId(String loginId);
 	public List<User> listUserByPage(int page, int rows);
 	public Long listUserCount();
+	public Long listUserCountByName(String name);
+	public List<User> listUserNameByPage(String name, int page, int rows);
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public int addUser(User user);	
@@ -24,8 +26,5 @@ public interface UserService {
 	public void updateUser(User user);
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	public void deleteUser(Integer id);
-	
-	
-	
 
 }

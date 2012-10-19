@@ -114,6 +114,12 @@ $(document).ready(function(){
 	$("#btn_cancel").click(function(){
 		$('#dlg').dialog('close')
 	});
+	
+	$("#btn_search").click(function(){
+		$('#dg').datagrid('load',{  
+	        name: $('#search_name').val()  
+	    });
+	});
 });
 </script>
 
@@ -123,7 +129,10 @@ $(document).ready(function(){
     <div id="toolbar">  
         <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" >New User</a>  
         <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Edit User</a>  
-        <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" >Remove User</a>  
+        <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" >Remove User</a>
+        
+        Name:<input type="text" id="search_name" size="10" />
+        <a href="javascript:void(0)" id="btn_search" class="easyui-linkbutton" iconCls="icon-search">Search</a>
     </div>  
       
     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"  

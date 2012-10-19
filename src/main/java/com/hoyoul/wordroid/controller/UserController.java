@@ -42,6 +42,7 @@ public class UserController {
 
 		int page = 1;
 		int rows = 10;
+		String name = "";
 		
 		if(request.getParameter("page") != null && !"".equals(request.getParameter("page"))){
 			page = Integer.parseInt(request.getParameter("page"));
@@ -49,10 +50,19 @@ public class UserController {
 		if(request.getParameter("rows") != null && !"".equals(request.getParameter("rows"))){
 			rows = Integer.parseInt(request.getParameter("rows"));
 		}
+		if(request.getParameter("name") != null && !"".equals(request.getParameter("name"))){
+			name = request.getParameter("name");
+		}
 		
 		ReturnData returnData = new ReturnData();
-		returnData.setTotal(userService.listUserCount());
-		returnData.setRows(userService.listUserByPage(page,rows));
+		
+		if("".equals(name)){
+			returnData.setTotal(userService.listUserCount());
+			returnData.setRows(userService.listUserByPage(page,rows));
+		}else{
+			returnData.setTotal(userService.listUserCountByName(name));
+			returnData.setRows(userService.listUserNameByPage(name,page,rows));
+		}
 		
 		logger.info((new Gson()).toJson(returnData));
 		

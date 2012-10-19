@@ -14,4 +14,6 @@ public interface UserDAO {
 	public User getUserByLoginId(String loginId);
 	public List<User> listUserByPage(int page, int rows);
 	public Long listUserCount();
+	public Long listUserCountByName(String name);
+	public List<User> listUserNameByPage(String name, int page, int rows);
 }

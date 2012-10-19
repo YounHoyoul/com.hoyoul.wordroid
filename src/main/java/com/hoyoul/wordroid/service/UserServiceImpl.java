@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> listUserByPage(int page, int rows) {
-		//return userDAO.listUserByPage(page,rows);
 		
 		List<User> list = userDAO.listUserByPage(page,rows);
 		
@@ -63,6 +62,32 @@ public class UserServiceImpl implements UserService {
 		
 		return list;
 	}
+	
+	@Override
+	public Long listUserCountByName(String name) {
+		return userDAO.listUserCountByName(name);
+	}
+
+	@Override
+	public List<User> listUserNameByPage(String name, int page, int rows) {
+		
+		List<User> list = userDAO.listUserNameByPage(name,page,rows);
+		
+		for(User user:list){
+			List<Wordset> wordsets = user.getWordsets();
+			List<Folder> folders = user.getFolders();
+			
+			for(Wordset wordset : wordsets){
+				wordset.getId();
+			}
+			
+			for(Folder folder : folders){
+				folder.getId();
+			}
+		}
+		
+		return list;
+	}	
 	
 	@Override
 	public int addUser(User user) {
@@ -93,7 +118,5 @@ public class UserServiceImpl implements UserService {
 	public Long listUserCount() {
 		return userDAO.listUserCount();
 	}
-
-
 
 }

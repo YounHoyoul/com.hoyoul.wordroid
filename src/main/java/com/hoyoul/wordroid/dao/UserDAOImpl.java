@@ -81,6 +81,24 @@ public class UserDAOImpl implements UserDAO {
 		return list.get(0);
 	}
 
+	@Override
+	public Long listUserCountByName(String name) {
+		Query query = sessionFactory.getCurrentSession().createQuery("select count(*) from User e where e.name like :name");
+		query.setParameter("name", "%"+name+"%");
+		Long count = (Long) query.uniqueResult();
+		return count;
+	}
+
+	@Override
+	public List<User> listUserNameByPage(String name, int page, int rows) {
+		Query query = sessionFactory.getCurrentSession().createQuery("from User e where e.name like :name");
+		query.setParameter("name", "%"+name+"%");
+		query.setFirstResult((page-1)*rows);
+		query.setMaxResults(rows);
+		
+		return query.list();
+	}
+
 
 
 
