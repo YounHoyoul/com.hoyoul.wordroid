@@ -20,23 +20,23 @@
 
 ###User Authentication
 - Implementing the module by AOP of spring framework.
-- Monitoring the user information in http session object.
+- Monitoring the user information in http session object. If invalid, redirect to login page.
 
 ###Sign up/Logout and Join
 - Checking validation of new user id through Ajax.
 - Showing error message by JQuery.
 - Showing the strength of the password as the user inputs by jQuery.
 
-##Management of User
-- Completed front end module(CRUDL) through Ajax with JQuery plugin "jEasyUI".
+##User's Module
+- Completed front end module(CRUDL) through Ajax with the datagrid of JQuery plugin "jEasyUI".
 - Completed Controller and Service modules with Spring framework.
 - Completed DAO and DTO(VO) module with Hibernate framework.
 - Paging.
 - Searching by name.
 
-##Management of Card Set and Folder
+##Card Set and Folder's Module
 
-##Management of Card
+##Card's Module
 
 ##Study with Flash Card
 
