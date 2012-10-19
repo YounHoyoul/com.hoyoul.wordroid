@@ -22,6 +22,9 @@
 - Implementing the module by AOP of spring framework.
 - Monitoring the user information in http session object. If invalid, redirect to login page.
 
+###Layout 
+- Completed the screen layout with Tiles framework.
+
 ###Sign up/Logout and Join
 - Checking validation of new user id through Ajax.
 - Showing error message by JQuery.
@@ -31,8 +34,10 @@
 - Completed front end module(CRUDL) through Ajax with the datagrid of JQuery plugin "jEasyUI".
 - Completed Controller and Service modules with Spring framework.
 - Completed DAO and DTO(VO) module with Hibernate framework.
-- Paging.
+- Paging and completed stress test.
 - Searching by name.
+<br>
+<img src="http://wordroid.godohosting.com/user.png">
 
 ##Card Set and Folder's Module
 
