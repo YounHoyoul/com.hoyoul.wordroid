@@ -14,25 +14,25 @@
 #Main Function
 ##Common Function
 ###Logging
-- implemented the module by AOP of spring framework.
-- monitoring the parameters into the controllers from the client request.
-- monitoring the return value of the controllers.
+- Completed the module by AOP of spring framework.
+- Monitoring the parameters into the controllers from the client request.
+- Monitoring the return value of the controllers.
 
 ###User Authentication
-- implemented the module by AOP of spring framework.
-- monitoring the user information in http session object.
+- Implementing the module by AOP of spring framework.
+- Monitoring the user information in http session object.
 
 ###Sign up/Logout and Join
-- checking validation of new user id through Ajax.
-- showing error message by JQuery.
-- showing the strength of the password as the user inputs by jQuery.
+- Checking validation of new user id through Ajax.
+- Showing error message by JQuery.
+- Showing the strength of the password as the user inputs by jQuery.
 
 ##Management of User
-- completed front end module(CRUDL) through Ajax with JQuery plugin "jEasyUI".
-- completed controller and service modules with Spring framework.
-- completed DAO and DTO(VO) module with Hibernate framework.
-- paging.
-- searching by name.
+- Completed front end module(CRUDL) through Ajax with JQuery plugin "jEasyUI".
+- Completed Controller and Service modules with Spring framework.
+- Completed DAO and DTO(VO) module with Hibernate framework.
+- Paging.
+- Searching by name.
 
 ##Management of Card Set and Folder
 
