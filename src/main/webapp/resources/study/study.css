@@ -1,102 +1,102 @@
 ﻿.studybox{
-  padding: 4px;
-  font: bold 13px Tahoma;
-  border: 1px solid #cdcdcd;
-  width: 150px;
-  height: 150px;
-  list-style: none;
-  overflow: auto;
-  border-radius : 4px;
+	padding: 4px;
+	font: bold 13px Tahoma;
+	border: 1px solid #cdcdcd;
+	width: 150px;
+	height: 150px;
+	list-style: none;
+	overflow: auto;
+	border-radius : 4px;
 }
 
 #card_frame{
-  width: 615px;
-  height: 200px;
-  padding: 0px;
-  margin-bottom: 5px;
+	width: 615px;
+	height: 200px;
+	padding: 0px;
+	margin-bottom: 5px;
 }
 
 .card{
-  width: 575px;
-  height: 160px;
-  border: 2px solid #cdcdcd;
-  border-radius: 8px;
-  font: bold 30px Tahoma; 
-  text-align: center;
-  padding: 20px;
-  background-color:#fff;
+	width: 575px;
+	height: 160px;
+	border: 2px solid #cdcdcd;
+	border-radius: 8px;
+	font: bold 30px Tahoma; 
+	text-align: center;
+	padding: 20px;
+	background-color:#fff;
 }
 #option_frame,#answer_frame,#box_frame{
-  width: 615px;
-  height: 100px;
-  border-radius: 0px;
-  margin-bottom: 5px;
+	width: 615px;
+	height: 100px;
+	border-radius: 0px;
+	margin-bottom: 5px;
 }
 #option_frame{
-  border: 1px solid #CDCDCD;
-  width: 595px;
-  height: 20px;
-  padding: 10px;
-  border-radius : 4px;
+	border: 1px solid #CDCDCD;
+	width: 595px;
+	height: 20px;
+	padding: 10px;
+	border-radius : 4px;
 }
 #box_frame{
-  height: 50px;
+	height: 50px;
 }
 #button_frame{
-  width: 605px;
-  padding:5px;
-  text-align: right;
+	width: 605px;
+	padding:5px;
+	text-align: right;
 }
 
 .answer{
-  display:inline-block;
-  width: 202px;
-  height: 100px;
-  border: 1px solid #CDCDCD;
-  border-radius : 0px;
-  overflow: auto;
-  background-color:#fff;
-  font: bold 14px Tahoma;
-  color: #CDCDCD;
-  text-align:center;
+	display:inline-block;
+	width: 202px;
+	height: 100px;
+	border: 1px solid #CDCDCD;
+	border-radius : 0px;
+	overflow: auto;
+	background-color:#fff;
+	font: bold 14px Tahoma;
+	color: #CDCDCD;
+	text-align:center;
 }
 .answer li{
-  list-style : none;
-  width:180px;
-  height:20px;
-  overflow:hidden;
+	list-style : none;
+	width:180px;
+	height:20px;
+	overflow:hidden;
 }
 .box{
-  display:inline-block;
-  width: 99px;
-  height: 50px;
-  border: 1px solid #CDCDCD;
-  border-radius : 0px;
-  overflow: auto;
-  background-color:#fff;
-  font: bold 14px Tahoma;
-  color: #CDCDCD;
-  text-align:center;
+	display:inline-block;
+	width: 99px;
+	height: 50px;
+	border: 1px solid #CDCDCD;
+	border-radius : 0px;
+	overflow: auto;
+	background-color:#fff;
+	font: bold 14px Tahoma;
+	color: #CDCDCD;
+	text-align:center;
 }
 .border_no{
-  color: red;
-  border: 1px solid red;
+	color: red;
+	border: 1px solid red;
 }
 .border_yes{
-  color: green;
-  border: 1px solid green;
+	color: green;
+	border: 1px solid green;
 }
 .border_sure{
-  color: blue;
-  border: 1px solid blue;
+	color: blue;
+	border: 1px solid blue;
 }
 .drag{
-  color: rgba(0,0,0,0.2);
-  background-color:rgba(255,255,255,0.2)
+	color: rgba(0,0,0,0.2);
+	background-color:rgba(255,255,255,0.2)
 }
 #dlg_word,#dlg_mean{
-  width:280px;
+	width:280px;
 }
 #modify_dialog table{
-  font : 13px Tahoma;
+	font : 13px Tahoma;
 }

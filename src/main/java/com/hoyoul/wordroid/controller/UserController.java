@@ -1,5 +1,12 @@
 package com.hoyoul.wordroid.controller;
 
+import java.util.Enumeration;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
+import com.hoyoul.wordroid.HomeController;
 import com.hoyoul.wordroid.dto.User;
 import com.hoyoul.wordroid.service.UserService;
 
@@ -17,12 +26,22 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
 	@RequestMapping(value="/user/list",method=RequestMethod.GET)
-	public String listPage(Model model){
+	public String listPage(Model model,HttpServletRequest request){
 		
-		model.addAttribute("userList", userService.listUser());
+		//model.addAttribute("userList", userService.listUser());
 		
 		return "user/list";
+	}
+	
+	@RequestMapping(value="/user/data",method=RequestMethod.GET)
+	public String list(Model model,HttpServletRequest request){
+
+		model.addAttribute("data", (new Gson()).toJson(userService.listUser()));
+		
+		return "jsondata";
 	}
 	
 	@RequestMapping(value="/user/detail/{userId}",method=RequestMethod.GET)

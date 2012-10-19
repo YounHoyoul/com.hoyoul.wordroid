@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.hoyoul.wordroid.dao.WordDAO;
 import com.hoyoul.wordroid.dao.UserDAO;
+import com.hoyoul.wordroid.dto.Folder;
 import com.hoyoul.wordroid.dto.User;
+import com.hoyoul.wordroid.dto.Wordset;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,7 +22,23 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> listUser() {
-		return userDAO.listUser();
+		
+		List<User> list = userDAO.listUser();
+		
+		for(User user:list){
+			List<Wordset> wordsets = user.getWordsets();
+			List<Folder> folders = user.getFolders();
+			
+			for(Wordset wordset : wordsets){
+				wordset.getId();
+			}
+			
+			for(Folder folder : folders){
+				folder.getId();
+			}
+		}
+		
+		return list;
 	}
 	
 	@Override

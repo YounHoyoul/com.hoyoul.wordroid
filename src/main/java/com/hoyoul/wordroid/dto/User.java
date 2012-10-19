@@ -31,7 +31,7 @@ public class User {
 	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
 	private List<Wordset> wordsets = new ArrayList<Wordset>();
 	
-	@OneToMany(mappedBy="folderUser",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="folderUser",fetch=FetchType.LAZY)
 	private List<Folder> folders = new ArrayList<Folder>();;
 
 	public User(){}

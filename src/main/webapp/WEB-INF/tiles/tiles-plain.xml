@@ -8,14 +8,29 @@
         <put-attribute name="body"   value="/WEB-INF/template/body.jsp"/>
     </definition>
     
+    <definition name="*/*/data" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/data.jsp"/>
+    </definition>
+    <definition name="*/data" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/{1}/data.jsp"/>
+    </definition>
     <definition name="data" extends="base.plain">
         <put-attribute name="body" value="/WEB-INF/views/data.jsp"/>
     </definition>
+	
+	<definition name="jsondata" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/jsondata.jsp"/>
+    </definition>
+    
     <definition name="result" extends="base.plain">
         <put-attribute name="body" value="/WEB-INF/views/result.jsp"/>
     </definition>
     <definition name="main/check" extends="base.plain">
         <put-attribute name="body" value="/WEB-INF/views/main/check.jsp"/>
+    </definition>
+    
+    <definition name="main/data" extends="base.plain">
+        <put-attribute name="body" value="/WEB-INF/views/main/data.jsp"/>
     </definition>    
 </tiles-definitions>
 
