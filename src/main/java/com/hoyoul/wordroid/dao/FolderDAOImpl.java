@@ -19,7 +19,7 @@ public class FolderDAOImpl implements FolderDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Folder> listFolder() {
-		return sessionFactory.getCurrentSession().createQuery("from Folder").list();
+		return sessionFactory.getCurrentSession().createQuery("from Folder e order by e.name").list();
 	}	
 	
 	@Override
@@ -50,7 +50,7 @@ public class FolderDAOImpl implements FolderDAO {
 	public List<Folder> listFolderByUserRoot(User user) {
 		if(user == null) return null;
 		
-		String hql="from Folder e where e.folderUser = :folderUser and e.parentFolder = null";
+		String hql="from Folder e where e.folderUser = :folderUser and e.parentFolder = null order by e.name";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("folderUser", user);
 		
@@ -62,7 +62,7 @@ public class FolderDAOImpl implements FolderDAO {
 	public List<Folder> listFolderByParentFolder(Folder folder) {
 		if(folder == null) return null;
 		
-		String hql="from Folder e where e.parentFolder = :parentFolder";
+		String hql="from Folder e where e.parentFolder = :parentFolder order by e.name";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("parentFolder", folder);
 		return query.list();

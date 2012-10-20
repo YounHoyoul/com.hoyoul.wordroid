@@ -34,11 +34,11 @@ public class Wordset {
 	@OneToMany(mappedBy="wordset",fetch=FetchType.LAZY)
 	private List<Word> words = new ArrayList<Word>();
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne/*(cascade={CascadeType.ALL})*/
 	@JoinColumn(name="USERID")
 	private User user;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne/*(cascade={CascadeType.ALL})*/
 	@JoinColumn(name="FOLDERID")
 	private Folder folder;
 		

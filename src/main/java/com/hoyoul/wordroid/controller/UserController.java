@@ -64,7 +64,7 @@ public class UserController {
 			returnData.setRows(userService.listUserNameByPage(name,page,rows));
 		}
 		
-		logger.info((new Gson()).toJson(returnData));
+		logger.debug((new Gson()).toJson(returnData));
 		
 		model.addAttribute("data", (new Gson()).toJson(returnData));
 		

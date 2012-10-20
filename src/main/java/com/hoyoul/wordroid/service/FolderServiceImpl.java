@@ -9,6 +9,7 @@ import com.hoyoul.wordroid.dao.WordDAO;
 import com.hoyoul.wordroid.dao.FolderDAO;
 import com.hoyoul.wordroid.dto.Folder;
 import com.hoyoul.wordroid.dto.User;
+import com.hoyoul.wordroid.dto.Wordset;
 
 @Service
 public class FolderServiceImpl implements FolderService {
@@ -46,12 +47,44 @@ public class FolderServiceImpl implements FolderService {
 
 	@Override
 	public List<Folder> listFolderByUserRoot(User user) {
-		return folderDAO.listFolderByUserRoot(user);
+		//return folderDAO.listFolderByUserRoot(user);
+		List<Folder> folderList = folderDAO.listFolderByUserRoot(user);
+		
+		for(Folder tmp:folderList){
+			List<Folder> sublist = tmp.getChildrenFolder();
+			for(Folder subtmp:sublist){
+				subtmp.getId();
+			}
+			
+			List<Wordset> wordsets = tmp.getWordsets();
+			for(Wordset set:wordsets){
+				set.getId();
+			}
+			
+		}
+		
+		return folderList;
 	}
 
 	@Override
 	public List<Folder> listFolderByParentFolder(Folder folder) {
-		return folderDAO.listFolderByParentFolder(folder);
+		
+		List<Folder> folderList = folderDAO.listFolderByParentFolder(folder);
+		
+		for(Folder tmp:folderList){
+			List<Folder> sublist = tmp.getChildrenFolder();
+			for(Folder subtmp:sublist){
+				subtmp.getId();
+			}
+			
+			List<Wordset> wordsets = tmp.getWordsets();
+			for(Wordset set:wordsets){
+				set.getId();
+			}
+			
+		}
+		
+		return folderList;
 	}
 
 }

@@ -29,11 +29,11 @@ public class Folder {
 	@OneToMany(mappedBy="folder",fetch=FetchType.LAZY)
 	private List<Wordset> wordsets = new ArrayList<Wordset>();
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne/*(cascade={CascadeType.ALL})*/
 	@JoinColumn(name="USERID")
 	private User folderUser;
 
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne/*(cascade={CascadeType.ALL})*/
     @JoinColumn(name="PARENT_FOLDERID")
 	private Folder parentFolder;
 	
