@@ -8,6 +8,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -39,6 +40,9 @@ public class UserControllerTest {
     
     private static ApplicationContext context;
     
+    private int userId=0;
+    private int userId2=0;
+    
 	@BeforeClass
 	public static void init(){
 
@@ -57,9 +61,16 @@ public class UserControllerTest {
 		controller = context.getBean("userController",UserController.class);
 		service = context.getBean("userServiceImpl",UserService.class);
 		
-
-		service.addUser(new User("First Name","First LoginID","First Password","First Email"));
-		service.addUser(new User("Second Name","Second LoginID","Second Password","Second Email"));
+		userId = service.addUser(new User("First Name","First LoginID","First Password","First Email"));
+		//service.addUser(new User("Second Name","Second LoginID","Second Password","Second Email"));
+    }
+    
+    @After
+    public void clean(){
+    	service.deleteUser(userId);
+    	if(userId2 != 0){
+    		service.deleteUser(userId2);
+    	}
     }
     
     @Test
@@ -69,28 +80,48 @@ public class UserControllerTest {
         request.setMethod("GET");
         
         ModelAndView mav = adapter.handle(request, response, controller);
-        
-        List<User> list = service.listUser();
-        
-        assertEquals(2,list.size());
-        assertThat(mav.getModelMap().get("userList"),is(List.class));
+
         assertThat(mav.getViewName(),is("user/list"));
     }
     
     @Test
-    public void detailPage() throws Exception{
+    public void list() throws Exception{
     	
-    	request.setRequestURI("/user/detail/1");
+    	request.setRequestURI("/user/data");
         request.setMethod("GET");
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
-        List<User> list = service.listUser();
-        
-        assertNotNull(mav.getModelMap().get("user"));
-        assertThat(mav.getModelMap().get("user"),is(User.class));
-        assertThat(mav.getViewName(),is("user/detail"));    
+        assertNotNull(mav.getModel().get("data"));
+        assertThat(mav.getViewName(),is("jsondata"));
     }    
+    
+    @Test
+    public void listbypage() throws Exception{
+    	
+    	request.setRequestURI("/user/data");
+        request.setMethod("GET");
+        request.setParameter("rows", "10");
+        request.setParameter("page", "5");
+                
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        assertNotNull(mav.getModel().get("data"));
+        assertThat(mav.getViewName(),is("jsondata"));
+    }
+    
+    @Test
+    public void listbyname() throws Exception{
+    	
+    	request.setRequestURI("/user/data");
+        request.setMethod("GET");
+        request.setParameter("name", "aa");
+                
+        ModelAndView mav = adapter.handle(request, response, controller);
+        
+        assertNotNull(mav.getModel().get("data"));
+        assertThat(mav.getViewName(),is("jsondata"));
+    }
     
     @Test
     public void add() throws Exception{
@@ -103,54 +134,45 @@ public class UserControllerTest {
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
-        User actualUser = service.getUser(3);
+        User actualUser = service.getUser((Integer)mav.getModel().get("userId"));
+        
+        userId2 = actualUser.getId();
+        
         assertEquals("Test Name",actualUser.getName());
         assertEquals("Test Login ID",actualUser.getLoginId());
-        assertThat(mav.getViewName(),is("redirect:/user/list"));
-    }
-    
-    @Test
-    public void updatePage() throws Exception{
-    	request.setRequestURI("/user/updatepage/2");
-        request.setMethod("GET");
-        
-        ModelAndView mav = adapter.handle(request, response, controller);
-        
-        assertNotNull(mav.getModelMap().get("user"));
-        assertThat(mav.getModelMap().get("user"),is(User.class));
-        assertThat(mav.getViewName(),is("user/modify"));    
+        assertThat(mav.getViewName(),is("jsondata"));
     }
     
     @Test
     public void update() throws Exception{
     	
-    	request.setRequestURI("/user/update/2");
+    	request.setRequestURI("/user/update/"+userId);
         request.setMethod("POST");
-        request.setParameter("id","2");
+        request.setParameter("id",""+userId);
         request.setParameter("name","Second User[Modify]");
         request.setParameter("loginId", "Second User Description[Modify].");
         request.setParameter("password", "Test Password[Modify]");
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
-        User actualUser = service.getUser(2);
+        User actualUser = service.getUser(userId);
         assertEquals("Second User[Modify]",actualUser.getName());
         assertEquals("Second User Description[Modify].",actualUser.getLoginId());
         assertEquals("Test Password[Modify]",actualUser.getPassword());
         
-        assertThat(mav.getViewName(),is("redirect:/user/updatepage/2"));
+        assertThat(mav.getViewName(),is("jsondata"));
     }
     
     @Test
     public void delete() throws Exception{
     	
-    	request.setRequestURI("/user/delete/2");
+    	request.setRequestURI("/user/delete/"+userId);
         request.setMethod("GET");
         
         ModelAndView mav = adapter.handle(request, response, controller);
         
-        User actualUser = service.getUser(2);
+        User actualUser = service.getUser(userId);
         assertNull(actualUser);
-        assertThat(mav.getViewName(),is("redirect:/user/list"));
+        assertThat(mav.getViewName(),is("jsondata"));
     }
 }

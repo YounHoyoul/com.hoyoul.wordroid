@@ -92,8 +92,9 @@ public class UserController {
 	@RequestMapping(value="/user/add",method=RequestMethod.POST)
 	public String add(@ModelAttribute("user") User user,Model model,HttpServletRequest request){
 		
-		userService.addUser(user);
+		int id = userService.addUser(user);
 		
+		model.addAttribute("userId",id);
 		model.addAttribute("data", "{}");
 		
 		return "jsondata";
@@ -108,6 +109,7 @@ public class UserController {
 		user.setId(userId);
 		userService.updateUser(user);
 		
+		model.addAttribute("userId",userId);
 		model.addAttribute("data", "{}");
 		
 		return "jsondata";

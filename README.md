@@ -1,3 +1,6 @@
+#INTRODUCTION
+I am making this system to study new framework for me first. After I make this system, I can memorize efficiently some terms and words based on Flash Card. I get this idea from my Android Apps "Wordroid".
+
 #Main Function
 ##Common Function
 ###Logging
@@ -27,12 +30,13 @@
 - Completed DAO and DTO(VO) module with Hibernate framework.
 - Paging and completed stress test.
 - Searching by name.
-<br>
+<br/>
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png?raw=true">
 
-##Card Set and Folder's Module
-
-##Card's Module
+##Flash Card Set's Module
+- Making screen layout with only the static html
+<br/>
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset.png?raw=true">
 
 ##Study with Flash Card
 
