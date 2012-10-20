@@ -84,15 +84,19 @@ $(document).ready(function(){
 </div> 
 
 <div id="toolbar1">  
-    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" >New Card</a>  
-    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Edit Card</a>  
-    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" >Remove Card</a>
+    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" ></a>  
+    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" ></a>  
+    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" ></a>
+    <input type="text" id="search_name" size="10" />
+    <a href="javascript:void(0)" id="btn_search" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
 </div> 
 
 <div id="toolbar2">  
-    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" >New Card</a>  
-    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" >Edit Card</a>  
-    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" >Remove Card</a>
+    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" ></a>  
+    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" ></a>  
+    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" ></a>
+    <input type="text" id="search_name" size="10" />
+    <a href="javascript:void(0)" id="btn_search" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
 </div>  
 
 </article>
