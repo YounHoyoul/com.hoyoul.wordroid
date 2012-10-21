@@ -12,6 +12,61 @@ $(document).ready(function(){
 		url:"folder/data",
 		method:"get",
 		animate:"true",
+		onClick: function(node){
+			
+			if($('#tt').tabs('exists',node.text)){
+				$('#tt').tabs('select',node.text);
+				return;
+			}	
+			
+			if(node.attributes.type == "wordset"){
+				$("#tt").tabs('add',{
+					title:node.text,
+					content:'<table id="dg_'+node.id+'"></table>',
+					closable:true
+				});
+				
+				$('#dg_'+node.id).datagrid({  
+				    url:'',
+				    width:550,
+				    height:310,
+				    pagination:true,
+				    rownumbers:true,
+				    columns:[[  
+				        {field:'word',title:'Word',width:250},  
+				        {field:'mean',title:'Mean',width:270}
+				    ]]  
+				});
+				
+				$('#dg_'+node.id).datagrid({
+					toolbar: [
+					{
+						iconCls: 'icon-add',
+						handler: function(){
+							//alert('add')
+						}
+					},'-',
+					{
+						iconCls: 'icon-edit',
+						handler: function(){
+							//alert('edit')
+						}
+					},'-',
+					{
+						iconCls: 'icon-remove',
+						handler: function(){
+							//alert('remove')
+						}
+					},'-',
+					{
+						iconCls: 'icon-search',
+						handler: function(){
+							//alert('search')
+						}
+					}]
+				});
+			}
+		},
 		onDblClick: function(node){  
             
 			beginEditText = node.text;
@@ -125,10 +180,9 @@ $(document).ready(function(){
             $('#fm').form('load',{	id:node.id,
             						name:node.text,
             						description:node.attributes.description,
-            						magic7:node.attributes.magic7,
-            						reverse:node.attributes.reverse
-            					 });  
-            //url = "./update/"+node.id;
+            						magic7:node.attributes.magic7?"on":"",
+            						reverse:node.attributes.reverse?"on":""
+            					 });
         } 
 	});
 	
@@ -155,7 +209,7 @@ $(document).ready(function(){
 		                        title: 'Error',  
 		                        msg: result.errorMsg  
 		                    });  
-		                } else {  
+		                } else {
 		                	var pnode = $("#folderTree").tree('getParent',node.target);
 							$("#folderTree").tree('reload',pnode.target);
 		                }
@@ -207,48 +261,7 @@ $(document).ready(function(){
 	            <ul id="folderTree" class="easyui-tree"></ul>  
 	        </div>  
 	        <div region="center" border="false" border="false">  
-	            <div class="easyui-tabs" fit="true">  
-	                <div title="Voca2001">  
-	                    <table id="tt" class="easyui-datagrid" style="width:550px;height:310px"  
-						        url="datagrid2_getdata.php"  
-						        iconCls="icon-save" toolbar="#toolbar1"
-						        rownumbers="true" pagination="true">  
-						    <thead>  
-						        <tr>  
-						            <th field="word" width="250">Word</th>  
-						            <th field="mean" width="270">Mean</th>  
-						        </tr>  
-						    </thead>
-						    <tbody>
-						    	<tr>
-						    		<td>I am going to the English class.</td>
-						    		<td>영어수업 가요.</td>
-						    	</tr>
-						    	<tr>
-						    		<td>My English is not so good.</td>
-						    		<td>제 영어가 짧아요.</td>
-						    	</tr>
-						    	<tr>
-						    		<td>Did you drive?</td>
-						    		<td>차 가져오셨나요?</td>
-						    	</tr>
-						    </tbody>
-						</table> 
-	                </div>  
-	                <div title="Master2002">  
-	                    <table id="tt" class="easyui-datagrid" style="width:550px;height:310px"  
-						        url="datagrid2_getdata.php"  
-						        iconCls="icon-save"  toolbar="#toolbar2"
-						        rownumbers="true" pagination="true">  
-						    <thead>  
-						        <tr>  
-						            <th field="word" width="250">Word</th>  
-						            <th field="mean" width="270">Mean</th>  
-						        </tr>  
-						    </thead>  
-						</table>
-	                </div>  
-	            </div>  
+	            <div id="tt" class="easyui-tabs" fit="true"></div>  
 	        </div>   
 	    </div>  
 	</div> 
@@ -286,23 +299,7 @@ $(document).ready(function(){
     <div id="dlg-buttons">  
         <a href="javascript:void(0)" id="btn_save" class="easyui-linkbutton" iconCls="icon-ok" >Save</a>  
         <a href="javascript:void(0)" id="btn_cancel" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>  
-    </div> 
+    </div>
     
-	<div id="toolbar1">  
-	    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" ></a>  
-	    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" ></a>  
-	    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" ></a>
-	    <input type="text" id="search_name" size="10" />
-	    <a href="javascript:void(0)" id="btn_search" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
-	</div> 
-	
-	<div id="toolbar2">  
-	    <a href="javascript:void(0)" id="btn_newuser" class="easyui-linkbutton" iconCls="icon-add" plain="true" ></a>  
-	    <a href="javascript:void(0)" id="btn_edituser" class="easyui-linkbutton" iconCls="icon-edit" plain="true" ></a>  
-	    <a href="javascript:void(0)" id="btn_destoryuser" class="easyui-linkbutton" iconCls="icon-remove" plain="true" ></a>
-	    <input type="text" id="search_name" size="10" />
-	    <a href="javascript:void(0)" id="btn_search" class="easyui-linkbutton" iconCls="icon-search" plain="true"></a>
-	</div>  
-
 </article>
 

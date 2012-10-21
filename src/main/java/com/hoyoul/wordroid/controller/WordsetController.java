@@ -67,7 +67,7 @@ public class WordsetController {
 		
 		//return "redirect:/wordset/list";
 		wordsetService.addWordset(wordset);
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		
 		return "jsondata";
 	}
@@ -80,8 +80,10 @@ public class WordsetController {
 		Wordset wordset2 = wordsetService.getWordset(wordset.getId());
 		wordset2.setName(wordset.getName());
 		wordset2.setDescription(wordset.getDescription());
+		wordset2.setMagic7(wordset.getMagic7());
+		wordset2.setReverse(wordset.getReverse());
 		wordsetService.updateWordset(wordset2);
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		
 		//return "redirect:/wordset/updatepage/"+wordset.getId();
 		return "jsondata";
@@ -93,7 +95,7 @@ public class WordsetController {
 		wordsetService.deleteWordset(wordsetId);
 		
 		//return "redirect:/wordset/list";
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		return "jsondata";
 	}
 }
