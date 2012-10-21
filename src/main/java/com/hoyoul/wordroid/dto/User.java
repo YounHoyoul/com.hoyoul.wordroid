@@ -30,7 +30,7 @@ public class User {
 	private String email;
 	
 	@OneToMany(mappedBy="folderUser",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
-	private List<Folder> folders = new ArrayList<Folder>();;
+	private List<Folder> folders = new ArrayList<Folder>();
 
 	public User(){}
 	

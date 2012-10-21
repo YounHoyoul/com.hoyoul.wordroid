@@ -130,7 +130,7 @@ public class FolderController {
 		}
 		
 		folderService.addFolder(folder);
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		
 		return "jsondata";
 	}
@@ -142,7 +142,7 @@ public class FolderController {
 		folder2.setName(folder.getName());
 		folder2.setDescription(folder.getDescription());
 		folderService.updateFolder(folder2);
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		return "jsondata";
 	}
 	
@@ -150,7 +150,7 @@ public class FolderController {
 	public String delete(@PathVariable("folderId") Integer folderId,Model model,HttpServletRequest request){
 		
 		folderService.deleteFolder(folderId);
-		model.addAttribute("data", "OK");
+		model.addAttribute("data", "{}");
 		return "jsondata";
 	}
 }

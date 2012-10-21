@@ -42,6 +42,7 @@ public class UserServiceImpl implements UserService {
 		
 		List<User> list = userDAO.listUserByPage(page,rows);
 		
+		/*
 		for(User user:list){
 			List<Folder> folders = user.getFolders();
 			
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
 				folder.getId();
 			}
 		}
+		*/
 		
 		return list;
 	}
@@ -63,6 +65,7 @@ public class UserServiceImpl implements UserService {
 		
 		List<User> list = userDAO.listUserNameByPage(name,page,rows);
 		
+		/*
 		for(User user:list){
 			List<Folder> folders = user.getFolders();
 			
@@ -70,6 +73,7 @@ public class UserServiceImpl implements UserService {
 				folder.getId();
 			}
 		}
+		*/
 		
 		return list;
 	}	

@@ -3,35 +3,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<style>
-article{
-	background: #FFFBCC;
-	border: 1px solid red;
-	padding: 20px;
-	margin-bottom: 15px;
-	height: 350px;
-}
-#fm{  
-    margin:0;  
-    padding:10px 30px;  
-}  
-.ftitle{  
-    font-size:14px;  
-    font-weight:bold;  
-    color:#666;  
-    padding:5px 0;  
-    margin-bottom:10px;  
-    border-bottom:1px solid #ccc;  
-}  
-.fitem{  
-    margin-bottom:5px;  
-}  
-.fitem label{  
-    display:inline-block;  
-    width:80px;  
-}  
-</style>
-
 <script>
 $(document).ready(function(){
 	$("#dg").datagrid({	
@@ -91,24 +62,24 @@ $(document).ready(function(){
 	});
 	
 	$("#btn_save").click(function(){
-		$('#fm').form('submit',{
-            url: url,  
-            onSubmit: function(){  
-                return $(this).form('validate');  
-            },  
-            success: function(result){
-                var result = eval('('+result+')');  
-                if (result.errorMsg){  
-                    $.messager.show({  
-                        title: 'Error',  
-                        msg: result.errorMsg  
-                    });  
-                } else {  
-                    $('#dlg').dialog('close');      // close the dialog  
-                    $('#dg').datagrid('reload');    // reload the user data  
-                }  
-            }  
-        });
+        if($('#fm').form('validate')){
+        	$.post(
+        		url,
+             	$("#fm").serialize(),
+             	function(result){
+	        		var result = eval('('+result+')');  
+	                if (result.errorMsg){  
+	                    $.messager.show({  
+	                        title: 'Error',  
+	                        msg: result.errorMsg  
+	                    });  
+	                } else {  
+	                    $('#dlg').dialog('close');      // close the dialog  
+	                    $('#dg').datagrid('reload');    // reload the user data  
+	                }
+       			}
+        	);
+        }
 	});
 	
 	$("#btn_cancel").click(function(){
@@ -138,7 +109,8 @@ $(document).ready(function(){
     <div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"  
             closed="true" buttons="#dlg-buttons">  
         <div class="ftitle">User Information</div>  
-        <form id="fm" method="post" novalidate>  
+        <form id="fm" method="post" novalidate>
+        	<input type="hidden" name="id"/>
             <div class="fitem">  
                 <label>Name:</label>  
                 <input name="name" class="easyui-validatebox" required="true">  

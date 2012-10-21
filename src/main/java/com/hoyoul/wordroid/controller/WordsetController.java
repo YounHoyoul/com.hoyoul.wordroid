@@ -73,7 +73,7 @@ public class WordsetController {
 	}
 	
 	@RequestMapping(value="/wordset/update/{wordsetId}",method=RequestMethod.POST)
-	public String update(@ModelAttribute("wordset") Wordset wordset,Model model){
+	public String update(@ModelAttribute("wordset") Wordset wordset,Model model,HttpServletRequest request){
 		
 		//wordsetService.updateWordset(wordset);
 		
@@ -88,7 +88,7 @@ public class WordsetController {
 	}
 	
 	@RequestMapping(value="/wordset/delete/{wordsetId}",method=RequestMethod.GET)
-	public String delete(@PathVariable("wordsetId") Integer wordsetId,Model model){
+	public String delete(@PathVariable("wordsetId") Integer wordsetId,Model model,HttpServletRequest request){
 		
 		wordsetService.deleteWordset(wordsetId);
 		

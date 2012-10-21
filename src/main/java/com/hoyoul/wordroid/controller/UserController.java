@@ -1,6 +1,5 @@
 package com.hoyoul.wordroid.controller;
 
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +31,10 @@ public class UserController {
 	@RequestMapping(value="/user/list",method=RequestMethod.GET)
 	public String listPage(Model model,HttpServletRequest request){
 		
-		//model.addAttribute("userList", userService.listUser());
-		
 		return "user/list";
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/user/data",method=RequestMethod.GET)
 	public String list(Model model,HttpServletRequest request){
 
@@ -64,30 +62,16 @@ public class UserController {
 			returnData.setRows(userService.listUserNameByPage(name,page,rows));
 		}
 		
-		logger.debug((new Gson()).toJson(returnData));
+		for(User user : (List<User>)returnData.getRows()){
+			user.setFolders(null);
+		}
 		
-		model.addAttribute("data", (new Gson()).toJson(returnData));
+		String jsonData = (new Gson()).toJson(returnData);
+		logger.info(jsonData);
+		model.addAttribute("data",jsonData);
 		
 		return "jsondata";
 	}
-	
-	/*
-	@RequestMapping(value="/user/detail/{userId}",method=RequestMethod.GET)
-	public String detailPage(@PathVariable("userId") Integer userId,Model model){
-		
-		model.addAttribute("user", userService.getUser(userId));
-		
-		return "user/detail";
-	}
-	
-	@RequestMapping(value="/user/updatepage/{userId}",method=RequestMethod.GET)
-	public String modifyPage(@PathVariable("userId") Integer userId,Model model){
-		
-		model.addAttribute("user", userService.getUser(userId));
-		
-		return "user/modify";
-	}
-	*/
 	
 	@RequestMapping(value="/user/add",method=RequestMethod.POST)
 	public String add(@ModelAttribute("user") User user,Model model,HttpServletRequest request){
@@ -98,8 +82,6 @@ public class UserController {
 		model.addAttribute("data", "{}");
 		
 		return "jsondata";
-		
-		//return "redirect:/user/list";
 	}
 	
 	@RequestMapping(value="/user/update/{userId}",method=RequestMethod.POST)
@@ -113,8 +95,6 @@ public class UserController {
 		model.addAttribute("data", "{}");
 		
 		return "jsondata";
-		
-		//return "redirect:/user/updatepage/"+user.getId();
 	}
 	
 	@RequestMapping(value="/user/delete/{userId}",method=RequestMethod.GET)
@@ -125,7 +105,5 @@ public class UserController {
 		model.addAttribute("data", "{}");
 		
 		return "jsondata";
-		
-		//return "redirect:/user/list";
 	}
 }
