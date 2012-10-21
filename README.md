@@ -25,7 +25,7 @@ I am making this system to study new framework for me first. After I make this s
 
 ##User's Module
 - Maked the test code with JUnit at first, after introducing jEasyUI plug-in, maked the test code again.
-- Completed front end module(CRUDL) through Ajax with the datagrid of JQuery plugin "jEasyUI".
+- Completed front end module(CRUDL) through Ajax with the datagrid plugin of "jEasyUI".
 - Completed Controller and Service modules with Spring framework.
 - Completed DAO and DTO(VO) module with Hibernate framework.
 - Paging and completed stress test.
@@ -37,6 +37,7 @@ I am making this system to study new framework for me first. After I make this s
 - Making screen layout with only the static html
 <br/>
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset.png?raw=true">
+- Completed the CRUDL function of Folder and CardSet through Ajax with the tree plugin of "jEasyUI".
 
 ##Study with Flash Card
 

@@ -11,21 +11,12 @@
 </style>
 <script>
 $(document).ready(function(){
-	/*
-	$("#loginid").keyup(function(){
-		$.get("./main/check/"+$(this).val(),function(data){
-			if(data != ""){
-				$("#loginid_error").html('<span class="error">'+data+'</span>');
-			}
-		});
-	});
-	*/
 	
 	$.extend($.fn.validatebox.defaults.rules, {  
 	    duplicate: {  
 	        validator: function(value,param){
 	        	var returnVal = $.ajax({	
-			        				url:"./main/check/"+value,
+			        				url:"../main/check/"+value,
 									async:false,
 									cache:false,
 									type:"GET"
@@ -37,87 +28,17 @@ $(document).ready(function(){
 	    }  
 	}); 
 
-	/*
-	$("#loginid").blur(function(){
-		var returnVal=$.ajax({
-			url:"./main/check/"+$(this).val(),
-    		async:false,
-    		cache:false,
-    		type:"GET"
-    	}).responseText;
-		
-		alert(returnVal);
-	});
-	*/
-	
 	$("#btn_submit").click(function(){
 		$("#joinform").trigger("submit");
 	});	
 	
 	$("#joinform").submit(function(){
-		
 		return $(this).form('validate');
-		
-		/*
-		$(".error").hide();
-		
-		var hasError = false;
-		
-		//LoginId Validation.
-		var loginid = $("#loginid").val();
-		if(loginid == ''){
-			$("#loginid_error").html('<span class="error">Please enter a login ID.</span>');
-			hasError = true;
-		}
-		
-		//Password Validation.
-		var passwordVal = $("#password").val();
-		var checkVal = $("#password-check").val();
-		
-		if (passwordVal == '') {
-			$("#password_error").html('<span class="error">Please enter a password.</span>');
-			hasError = true;
-		} else if (checkVal == '') {
-			$("#password-check_error").html('<span class="error">Please re-enter your password.</span>');
-			hasError = true;
-		} else if (passwordVal != checkVal ) {
-			$("#password-check_error").html('<span class="error">Passwords do not match.</span>');
-			hasError = true;
-		}
-		
-		//Name Validation.
-		var username = $("#username").val();
-		if(username == ''){
-			$("#username_error").html('<span class="error">Please enter a name.</span>');
-			hasError = true;
-		}
-		
-		//Email Validation.
-		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-		var emailblockReg =
-			/^([\w-\.]+@(?!gmail.com)(?!yahoo.com)(?!hotmail.com)([\w-]+\.)+[\w-]{2,4})?$/;
-		
-		var emailaddressVal = $("#email").val();
-		if(emailaddressVal == '') {
-			$("#email_error").html('<span class="error">Please enter your email address.</span>');
-			hasError = true;
-		}else if(!emailReg.test(emailaddressVal)) {
-			$("#email_error").html('<span class="error">Enter a valid email address.</span>');
-			hasError = true;
-		}else if(!emailblockReg.test(emailaddressVal)) {
-			$("#email_error").html('<span class="error">No yahoo, gmail or hotmail emails.</span>');
-			hasError = true;
-		} 
-		
-		if(hasError == true) { return false; }
-		*/
 	});
 	
 	$('#password').keyup(function(){
 		$('#result').html(checkStrength($('#password').val()));
 	});
-	
-
 	
 	$.extend($.fn.validatebox.defaults.rules, {  
 	    equals: {  
@@ -177,7 +98,7 @@ $(document).ready(function(){
 });
 </script>
 <div class="easyui-panel" title="Join Form" style="width:350px;background:#fafafa;padding:10px;">
-	<form:form id="joinform" method="post" action="main/join">
+	<form:form id="joinform" method="post" action="../main/join">
 	<table>
 		<tr>
 			<td align="right">*Login ID </td>

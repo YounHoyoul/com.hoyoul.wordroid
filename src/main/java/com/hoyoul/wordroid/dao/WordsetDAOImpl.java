@@ -62,9 +62,9 @@ public class WordsetDAOImpl implements WordsetDAO {
 	@Override
 	public List<Wordset> listWordsetByFolder(Folder folder) {
 		if(folder == null) return null;
-		String hql = "from Wordset e where e.folder = :folder";
+		String hql = "from Wordset e where e.parentFolder = :parentFolder";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("folder", folder);
+		query.setParameter("parentFolder", folder);
 		
 		return query.list();
 	}

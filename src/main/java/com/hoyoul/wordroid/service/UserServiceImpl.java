@@ -27,12 +27,7 @@ public class UserServiceImpl implements UserService {
 		List<User> list = userDAO.listUser();
 		
 		for(User user:list){
-			List<Wordset> wordsets = user.getWordsets();
 			List<Folder> folders = user.getFolders();
-			
-			for(Wordset wordset : wordsets){
-				wordset.getId();
-			}
 			
 			for(Folder folder : folders){
 				folder.getId();
@@ -48,12 +43,7 @@ public class UserServiceImpl implements UserService {
 		List<User> list = userDAO.listUserByPage(page,rows);
 		
 		for(User user:list){
-			List<Wordset> wordsets = user.getWordsets();
 			List<Folder> folders = user.getFolders();
-			
-			for(Wordset wordset : wordsets){
-				wordset.getId();
-			}
 			
 			for(Folder folder : folders){
 				folder.getId();
@@ -74,12 +64,7 @@ public class UserServiceImpl implements UserService {
 		List<User> list = userDAO.listUserNameByPage(name,page,rows);
 		
 		for(User user:list){
-			List<Wordset> wordsets = user.getWordsets();
 			List<Folder> folders = user.getFolders();
-			
-			for(Wordset wordset : wordsets){
-				wordset.getId();
-			}
 			
 			for(Folder folder : folders){
 				folder.getId();

@@ -102,13 +102,13 @@ public class WordroidTest {
 		Wordset wordset3 = new Wordset("ThirdWordset","Third Wordset Description");
 		Wordset wordset4 = new Wordset("FourchWordset","Fourth Wordset Description");
 		
-		wordset1.setUser(user);
-		wordset2.setUser(user);
-		wordset3.setUser(user);
-		wordset4.setUser(user);
+		//wordset1.setUser(user);
+		//wordset2.setUser(user);
+		//wordset3.setUser(user);
+		//wordset4.setUser(user);
 		
-		wordset3.setFolder(folder1);
-		wordset4.setFolder(folder1);
+		//wordset3.setFolder(folder1);
+		//wordset4.setFolder(folder1);
 		
 		wordsetService.addWordset(wordset1);
 		wordsetService.addWordset(wordset2);

@@ -26,8 +26,8 @@ public class Folder {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
-	@OneToMany(mappedBy="folder",fetch=FetchType.LAZY)
-	private List<Wordset> wordsets = new ArrayList<Wordset>();
+	//@OneToMany(mappedBy="folder",fetch=FetchType.LAZY)
+	//private List<Wordset> wordsets = new ArrayList<Wordset>();
 	
 	@ManyToOne/*(cascade={CascadeType.ALL})*/
 	@JoinColumn(name="USERID")
@@ -37,7 +37,7 @@ public class Folder {
     @JoinColumn(name="PARENT_FOLDERID")
 	private Folder parentFolder;
 	
-	@OneToMany(mappedBy="parentFolder",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="parentFolder",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
 	private List<Folder> childrenFolder = new ArrayList<Folder>();
 	
 	public Folder(){
@@ -63,14 +63,6 @@ public class Folder {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Wordset> getWordsets() {
-		return wordsets;
-	}
-
-	public void setWordsets(List<Wordset> wordsets) {
-		this.wordsets = wordsets;
 	}
 
 	public User getFolderUser() {

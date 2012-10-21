@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
-import com.hoyoul.wordroid.HomeController;
 import com.hoyoul.wordroid.dto.Folder;
 import com.hoyoul.wordroid.dto.TreeData;
 import com.hoyoul.wordroid.dto.User;
+import com.hoyoul.wordroid.dto.Wordset;
 import com.hoyoul.wordroid.service.FolderService;
+import com.hoyoul.wordroid.service.WordsetService;
 
 @Controller
 public class FolderController {
@@ -29,6 +30,9 @@ public class FolderController {
 	
 	@Autowired
 	private FolderService folderService;
+	
+	@Autowired
+	private WordsetService wordsetService;
 	
 	@RequestMapping(value="/folder/list",method=RequestMethod.GET)
 	public String listPage(Model model){
@@ -48,36 +52,49 @@ public class FolderController {
 			folder = folderService.getFolder(id);
 		}
 		
-		List<Folder> list = null;
+		List<Folder> listOfFolder = null;
 		
 		if(folder == null){
-			User user = (User)(request.getSession().getAttribute("loginUser"));
-			list = folderService.listFolderByUserRoot(user);
+			User loginUser = (User)(request.getSession().getAttribute("loginUser"));
+			listOfFolder = folderService.listFolderByUserRoot(loginUser);
 			
-			if(list == null || list.size() == 0){
-				Folder root = new Folder("Root","User Root Folder");
-				root.setFolderUser(user);
-				folderService.addFolder(root);
-				list = folderService.listFolderByUserRoot(user);
+			if(listOfFolder == null || listOfFolder.size() == 0){
+				Folder rootFolder = new Folder("Root","User Root Folder");
+				rootFolder.setFolderUser(loginUser);
+				folderService.addFolder(rootFolder);
+				listOfFolder = folderService.listFolderByUserRoot(loginUser);
 			}
-			
 		}else{
-			list = folderService.listFolderByParentFolder(folder);
+			listOfFolder = folderService.listFolderByParentFolder(folder);
 		}
 		
-		List<TreeData> tree = new ArrayList<TreeData>();
+		List<TreeData> listOfTreeData = new ArrayList<TreeData>();
+		List<TreeData> wordsets = new ArrayList<TreeData>();
 		
-		for(Folder tmp:list){
-			TreeData data = new TreeData();
-			data.setId(tmp.getId());
-			data.setText(tmp.getName());
-			data.setState("closed"); //<->"open"
-			data.getAttributes().setType("folder");
-			tree.add(data);
+		for(Folder tmp:listOfFolder){
+			TreeData treeData = new TreeData();
+			treeData.setId(tmp.getId());
+			treeData.setText(tmp.getName());
+			
+			if(tmp instanceof Wordset){
+				treeData.setState("open");
+				treeData.getAttributes().setType("wordset");
+				treeData.getAttributes().setDescription(tmp.getDescription());
+				treeData.getAttributes().setMagic7(((Wordset)tmp).getMagic7());
+				treeData.getAttributes().setReverse(((Wordset)tmp).getReverse());
+				wordsets.add(treeData);
+			}else{
+				treeData.setState("closed");
+				treeData.getAttributes().setType("folder");
+				treeData.getAttributes().setDescription(tmp.getDescription());
+				listOfTreeData.add(treeData);
+			}
 		}
 		
-		logger.info((new Gson()).toJson(tree));
-		model.addAttribute("data", (new Gson()).toJson(tree));
+		listOfTreeData.addAll(wordsets);
+		
+		logger.info((new Gson()).toJson(listOfTreeData));
+		model.addAttribute("data", (new Gson()).toJson(listOfTreeData));
 		
 		return "jsondata";
 	}

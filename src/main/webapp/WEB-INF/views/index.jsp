@@ -25,7 +25,6 @@ $(document).ready(function(){
 		onDblClick: function(node){  
             
 			beginEditText = node.text;
-			
 			$(this).tree('beginEdit',node.target);
         
 		},
@@ -33,20 +32,36 @@ $(document).ready(function(){
 			
 			e.preventDefault(); 
             $(this).tree('select',node.target);
+            
+            $(".icon_folder").hide();
+            $(".icon_wordset").hide();
+            
             if(node.attributes.type == "folder"){
-	            $('#mm').menu('show',{  
-	                left: e.pageX,
-	                top: e.pageY
-	            });  
+            	$(".icon_folder").show();
+			}else if(node.attributes.type == "wordset"){
+				$(".icon_wordset").show();
 			}
+            
+            $('#mm').menu('show',{  
+                left: e.pageX,
+                top: e.pageY
+            });
             
 		},
 		onAfterEdit:function(node){
-			
-			if(node.attributes.type=="folder"){
 				
-				if(beginEditText != node.text){
+			if(beginEditText != node.text){
+
+				if(node.attributes.type == "folder"){
 					$.post("folder/update/"+node.id,
+							{id:node.id,name:node.text,description:node.text},
+							function(data){
+								var pnode = $("#folderTree").tree('getParent',node.target);
+								$("#folderTree").tree('reload',pnode.target);
+							}
+						);
+				}else if(node.attributes.type == "wordset"){
+					$.post("wordset/update/"+node.id,
 							{id:node.id,name:node.text,description:node.text},
 							function(data){
 								var pnode = $("#folderTree").tree('getParent',node.target);
@@ -55,7 +70,6 @@ $(document).ready(function(){
 						);
 				}
 			}
-			
 		}
 	});
 	
@@ -79,14 +93,16 @@ $(document).ready(function(){
 	$("#menu_newcardset").click(function(e){
 		e.preventDefault();	
 		var t = $("#folderTree");
-		var node = t.tree('getSelected');  
-        t.tree('append', {  
-            parent: (node?node.target:null),  
-            data: [{  
-                text: 'New CardSet',
-                state: 'open'
-            }]  
-        }); 
+		var node = t.tree('getSelected');
+		
+		$.post("wordset/add",
+				{name:"new Card Set",description:"new Card Set",folderId:node.id},
+				function(data){
+					$("#folderTree")
+					.tree('reload',node.target)
+					.tree('expand',node.target);
+				}
+			);
 	});
 	
 	$("#menu_remove").click(function(e){
@@ -95,12 +111,18 @@ $(document).ready(function(){
 		var node = t.tree('getSelected');  
 		$.messager.confirm('Confirm','Are you sure you want to delete folder?',function(r){  
 		    if (r){  
-		        //alert('ok');
-		        $.get("folder/delete/"+node.id,function(data){
-		        	//alert(data.trim());
-		        	var pnode = $("#folderTree").tree('getParent',node.target);
-					$("#folderTree").tree('reload',pnode.target);
-		        });
+		        if(node.attributes.type == "folder"){
+			        $.get("folder/delete/"+node.id,function(data){
+			        	var pnode = $("#folderTree").tree('getParent',node.target);
+						$("#folderTree").tree('reload',pnode.target);
+			        });
+		        }else if(node.attributes.type == "wordset"){
+			        $.get("wordset/delete/"+node.id,function(data){
+			        	var pnode = $("#folderTree").tree('getParent',node.target);
+						$("#folderTree").tree('reload',pnode.target);
+			        });
+		        }
+
 		    }  
 		});
 	});
@@ -161,12 +183,10 @@ $(document).ready(function(){
 </div> 
 
 <div id="mm" class="easyui-menu" style="width:120px;">  
-    <div id="menu_newfolder" data-options="iconCls:'icon-add'">New Folder</div> 
-    <div id="menu_newcardset" data-options="iconCls:'icon-add'">New Card Set</div>
-    <div id="menu_remove" data-options="iconCls:'icon-remove'">Delete</div>       
-    <div class="menu-sep"></div>  
-    <div onclick="expand()">Expand</div>  
-    <div onclick="collapse()">Collapse</div>  
+    <div id="menu_newfolder" data-options="iconCls:'icon-add'" class="icon_folder">New Folder</div> 
+    <div id="menu_newcardset" data-options="iconCls:'icon-add'" class="icon_folder">New Card Set</div>
+    <div id="menu_remove" data-options="iconCls:'icon-remove'" class="icon_folder icon_wordset">Delete</div>
+    <div id="menu_property" data-options="iconCls:'icon-edit'" class="icon_folder icon_wordset">Property</div>
 </div>  
 
 <div id="toolbar1">  

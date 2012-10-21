@@ -5,7 +5,7 @@
 <script>
 $(document).ready(function(){
 	$("#btn_join").click(function(){
-		document.location.href="joinpage";
+		document.location.href="main/joinpage";
 	});
 	
 	$("#btn_submit").click(function(){
@@ -13,48 +13,10 @@ $(document).ready(function(){
 	});
 	
 	$("#loginform").submit(function(){
-		
 		return $(this).form('validate');
-		
-		/*
-		$(".error").hide();
-		var hasError = false;
-		
-		var loginid = $("#loginid").val();
-		if(loginid == ''){
-			hasError = true;
-			$("#loginid_error").html("<span class='error'>please enter your login ID</span>");
-		}
-		
-		var password = $("#password").val();
-		if(password == ''){
-			hasError = true;
-			$("#password_error").html("<span class='error'>please enter your password</span>");
-		}
-		
-		return !hasError;
-		*/
-		
 	});
-	
-	/*
-	$('#loginform').form({
-		onSubmit:function(){
-			return $(this).form('validate');
-		},
-		success:function(data){
-			$.messager.alert('Info', data, 'info');
-		}
-	});
-	*/
-	
 });
 
-/*
-$(document).ready(function(){
-	$("#submit,#btn_join").button();
-});
-*/
 </script>
 <style>
 </style>

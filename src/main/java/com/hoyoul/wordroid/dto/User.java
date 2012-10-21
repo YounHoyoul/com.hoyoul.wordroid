@@ -3,6 +3,7 @@ package com.hoyoul.wordroid.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,10 +29,7 @@ public class User {
 	@Column(name="EMAIL")
 	private String email;
 	
-	@OneToMany(mappedBy="user",fetch=FetchType.LAZY)
-	private List<Wordset> wordsets = new ArrayList<Wordset>();
-	
-	@OneToMany(mappedBy="folderUser",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="folderUser",fetch=FetchType.LAZY,cascade={CascadeType.ALL})
 	private List<Folder> folders = new ArrayList<Folder>();;
 
 	public User(){}
@@ -72,12 +70,6 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public List<Wordset> getWordsets() {
-		return wordsets;
-	}
-	public void setWordsets(List<Wordset> wordsets) {
-		this.wordsets = wordsets;
 	}
 	public List<Folder> getFolders() {
 		return folders;

@@ -56,11 +56,12 @@ public class FolderServiceImpl implements FolderService {
 				subtmp.getId();
 			}
 			
+			/*
 			List<Wordset> wordsets = tmp.getWordsets();
 			for(Wordset set:wordsets){
 				set.getId();
 			}
-			
+			*/
 		}
 		
 		return folderList;
@@ -76,12 +77,12 @@ public class FolderServiceImpl implements FolderService {
 			for(Folder subtmp:sublist){
 				subtmp.getId();
 			}
-			
+			/*
 			List<Wordset> wordsets = tmp.getWordsets();
 			for(Wordset set:wordsets){
 				set.getId();
 			}
-			
+			*/
 		}
 		
 		return folderList;

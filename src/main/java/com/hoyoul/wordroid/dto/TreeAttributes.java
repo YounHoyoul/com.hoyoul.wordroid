@@ -2,6 +2,33 @@ package com.hoyoul.wordroid.dto;
 
 public class TreeAttributes {
 	private String type;
+	private String description;
+	private Boolean magic7;
+	private Boolean reverse;
+
+	public Boolean getMagic7() {
+		return magic7;
+	}
+
+	public void setMagic7(Boolean magic7) {
+		this.magic7 = magic7;
+	}
+
+	public Boolean getReverse() {
+		return reverse;
+	}
+
+	public void setReverse(Boolean reverse) {
+		this.reverse = reverse;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public String getType() {
 		return type;
