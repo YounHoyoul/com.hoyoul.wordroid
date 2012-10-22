@@ -21,6 +21,9 @@ I am making this system to study new framework for me first. After I make this s
 - Showing error message by JQuery.
 - Showing the strength of the password as the user inputs by jQuery.
 - Making the test code with JUnit again after introducing jEasyUI.
+<br/>
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/login.png?raw=true">
+<br/>
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/join.png?raw=true">
 
 ##User's Module
@@ -29,6 +32,7 @@ I am making this system to study new framework for me first. After I make this s
 - Completed DAO and DTO(VO) module with Hibernate framework.
 <br/>
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png?raw=true">
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user1.png?raw=true">
 
 ##Flash Card Set's Module
 - Completed the CRUDL function of Folder and CardSet through Ajax with the tree/form plugin of "jEasyUI".
@@ -40,6 +44,7 @@ I am making this system to study new framework for me first. After I make this s
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset3.png?raw=true">
 
 ##Study with Flash Card
+- Make Study Window.
 
 <hr>
 
