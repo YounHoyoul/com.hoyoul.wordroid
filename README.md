@@ -24,18 +24,17 @@ I am making this system to study new framework for me first. After I make this s
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/join.png?raw=true">
 
 ##User's Module
-- Maked the test code with JUnit at first, after introducing jEasyUI plug-in, maked the test code again.
-- Completed front end module(CRUDL) through Ajax with the datagrid plugin of "jEasyUI".
+- Completed front end module(CRUDL) through Ajax with the datagrid/widow/from plugin of "jEasyUI".
 - Completed Controller and Service modules with Spring framework.
 - Completed DAO and DTO(VO) module with Hibernate framework.
-- Paging and completed stress test.
-- Searching by name.
 <br/>
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png?raw=true">
 
 ##Flash Card Set's Module
 - Completed the CRUDL function of Folder and CardSet through Ajax with the tree/form plugin of "jEasyUI".
 - Completed the CRUDL function of Word through Ajax with the datagrid/window/form plugin of "jEasyUI".
+- Completed Controller and Service modules with Spring framework.
+- Completed DAO and DTO(VO) module with Hibernate framework.
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset1.png?raw=true">
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset2.png?raw=true">
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset3.png?raw=true">
