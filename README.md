@@ -44,7 +44,13 @@ I am making this system to study new framework for me first. After I make this s
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset3.png?raw=true">
 
 ##Study with Flash Card
-- Make Study Window.
+- Completed Study Window , drag and drop function.
+<br/>
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/study1.png?raw=true">
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/study2.png?raw=true">
+- Magic7 
+- Leightner Study method.
+- SRS Study method.
 
 <hr>
 

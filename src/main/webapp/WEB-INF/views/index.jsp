@@ -3,6 +3,43 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<style>
+	#flashcard_win{
+		padding:20px;
+	}
+	.study_card{
+		width:450px;
+		height:140px;
+		border: 2px solid #cdcdcd;
+		background-color:#fffa;
+		margin-bottom:30px;
+		border-radius: 8px;
+		padding:30px;
+		text-align:center;
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.study_box{
+		width:110px;
+		height:40px;
+		display:inline-block;
+		border:1px solid #cdcdcd;
+		background-color:#fff;
+		margin-right:25px;
+		border-radius: 4px;
+		padding:20px;
+		text-align:center;
+		color:#888888;
+	}
+	
+	.dragging_card{
+		color:#aaaaaa;
+	}	
+	.select_box{
+		background-color:#fbec88;
+	}
+</style>
+
 <script>
 $(document).ready(function(){
 	//TREE
@@ -81,7 +118,54 @@ $(document).ready(function(){
 					{
 						iconCls: 'icon-search',
 						handler: function(){
-							//alert('search')
+							
+							flashcard_rows = $('#dg_'+node.id).datagrid('getData');
+							flashcard_index = 0;
+							
+							current_flashcard_row = flashcard_rows.rows[flashcard_index];
+							$("#flashcard").html(current_flashcard_row.word);
+							
+							$("#flashcard_win").css("display","");
+							$("#flashcard_win").window({
+								title:node.text,
+							    collapsible:false,  
+							    minimizable:false,  
+							    maximizable:false,
+							    width:600,
+							    height:400,
+							    modal:true
+							}).window("open");
+							
+							$(".study_card").draggable({  
+								proxy: "clone",
+								revert:true,
+								axis:"v",
+								onStartDrag:function(e){
+									$(this).addClass('dragging_card');
+								},
+								onStopDrag:function(e){
+									$(this).removeClass('dragging_card');
+								}
+							});
+							
+							$(".study_box").droppable({
+								accept:'.study_card',
+								onDragEnter:function(e,source){
+									$(this).addClass('select_box');
+								},
+								onDragLeave:function(e,source){
+									$(this).removeClass('select_box');
+								},
+								onDrop:function(e,source){
+									$(this).removeClass('select_box');
+									flashcard_index++;
+									if(flashcard_index >= flashcard_rows.rows.length){
+										flashcard_index = 0;
+									}
+									current_flashcard_row = flashcard_rows.rows[flashcard_index];
+									$("#flashcard").html(current_flashcard_row.word);
+								}
+							});
 						}
 					}]
 				});
@@ -174,6 +258,7 @@ $(document).ready(function(){
 		    }  
 		});
 	});
+	
 	
 	var selected_node = null;
 	
@@ -299,6 +384,22 @@ $(document).ready(function(){
 	$("#btn_word_cancel").click(function(){
 		$('#dlg_word').dialog('close');
 	});
+	
+	var flashcard_rows = null;
+	var flashcard_index = 0;
+	var current_flashcard_row = null;
+	
+	$("#flashcard_win").toggle(function(e){
+		if(current_flashcard_row != null){
+			$("#flashcard").html(current_flashcard_row.mean);
+		}
+		
+	},function(e){
+		if(current_flashcard_row != null){
+			$("#flashcard").html(current_flashcard_row.word);
+		}
+	});
+	
 });	
 </script>
 
@@ -370,6 +471,13 @@ $(document).ready(function(){
     <div id="dlg-word_buttons">  
         <a href="javascript:void(0)" id="btn_word_save" class="easyui-linkbutton" iconCls="icon-ok" >Save</a>  
         <a href="javascript:void(0)" id="btn_word_cancel" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>  
+    </div>
+    
+    <div id="flashcard_win" style="display:none;">
+    	<div class="study_card" id="flashcard">Card</div>
+    	<div class="study_box" id="no_box">NO BOX</div>
+    	<div class="study_box" id="yes_box">YES BOX</div>
+    	<div class="study_box" id="sure_box">SURE BOX</div>
     </div>
 </article>
 
