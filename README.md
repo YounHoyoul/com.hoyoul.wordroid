@@ -1,7 +1,7 @@
 #INTRODUCTION
 I am making this system to study new framework for me first. After I make this system, I can memorize efficiently some terms and words based on Flash Card. I get this idea from my Android Apps "Wordroid".
 
-#Main Function
+#Main Function[TO-DO]
 ##Common Function
 ###Logging
 - Completed the module by AOP of spring framework.
