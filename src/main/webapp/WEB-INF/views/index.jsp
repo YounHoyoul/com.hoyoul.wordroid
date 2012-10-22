@@ -27,11 +27,11 @@ $(document).ready(function(){
 				});
 				
 				$('#dg_'+node.id).datagrid({  
-				    url:'',
+				    url:'word/data/'+node.id,
+				    method:'get',
 				    width:550,
 				    height:310,
-				    pagination:true,
-				    rownumbers:true,
+				    pagination:true,rownumbers:true,fitColumns: true,singleSelect: true,
 				    columns:[[  
 				        {field:'word',title:'Word',width:250},  
 				        {field:'mean',title:'Mean',width:270}
@@ -43,19 +43,39 @@ $(document).ready(function(){
 					{
 						iconCls: 'icon-add',
 						handler: function(){
-							//alert('add')
+							
+							$('#fm_word').form('clear');
+							$("#word_wordsetid").val(node.id);
+							$('#dlg_word').dialog('open').dialog('setTitle','New Word');
+							$(".ftitle").html("New Word");
+							$("#fm_word_word").focus();
+							
+							wordurl = "./word/add";
 						}
 					},'-',
 					{
 						iconCls: 'icon-edit',
-						handler: function(){
-							//alert('edit')
+						handler: function(e){
+							var row = $('#dg_'+node.id).datagrid('getSelected');  
+					        if (row){  
+					        	$('#fm_word').form('load',row); 
+					        	$('#dlg_word').dialog('open').dialog('setTitle','Edit Word');
+					            $(".ftitle").html("Edit Word");
+					            wordurl = "./word/update/"+row.id;
+					        } 
 						}
 					},'-',
 					{
 						iconCls: 'icon-remove',
 						handler: function(){
-							//alert('remove')
+							var row = $('#dg_'+node.id).datagrid('getSelected');  
+					        if (row){  
+					            wordurl = "./word/delete/"+row.id;
+					            $.get(wordurl,function(result){
+									//alert(result);
+					            	$('#dg_'+node.id).datagrid('reload');
+								});
+					        } 
 						}
 					},'-',
 					{
@@ -249,7 +269,35 @@ $(document).ready(function(){
 	}
 	
 	$("#btn_cancel").click(function(){
-		$('#dlg').dialog('close')
+		$('#dlg').dialog('close');
+	});
+	
+	
+	var wordurl = "";
+	$("#btn_word_save").click(function(){
+		if($('#fm_word').form('validate')){
+        	$.post(
+        		wordurl,
+             	$("#fm_word").serialize(),
+             	function(result){
+	        		var result = eval('('+result+')');  
+	                if (result.errorMsg){  
+	                    $.messager.show({  
+	                        title: 'Error',  
+	                        msg: result.errorMsg  
+	                    });  
+	                } else {
+						$('#dlg_word').dialog('close');
+	            		var node = $("#folderTree").tree('getSelected');
+	            		$('#dg_'+node.id).datagrid('reload');
+	                }
+       			}
+        	);
+        }
+	});
+	
+	$("#btn_word_cancel").click(function(){
+		$('#dlg_word').dialog('close');
 	});
 });	
 </script>
@@ -301,5 +349,27 @@ $(document).ready(function(){
         <a href="javascript:void(0)" id="btn_cancel" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>  
     </div>
     
+    <div id="dlg_word" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"  
+	        closed="true" buttons="#dlg-word_buttons">  
+	    <div class="ftitle">Word Information</div>  
+	    <form id="fm_word" method="post" novalidate> 
+	    	<input type="hidden" id="word_id" name="id" value="" />
+	    	<input type="hidden" id="word_wordsetid" name="wordsetid" value="" />
+	        <div class="fitem">  
+	            <label>Word:</label>  
+	            <!-- <input name="word" class="easyui-validatebox" required="true"> -->
+	            <textarea id="fm_word_word" name="word" class="easyui-validatebox" cols="45" rows="2" required="true"></textarea>
+	        </div>  
+	        <div class="fitem">  
+	            <label>Mean:</label>  
+	            <!-- <input name="mean" class="easyui-validatebox" required="true">   -->
+	            <textarea id="fm_word_mean" name="mean" class="easyui-validatebox" cols="45" rows="2" required="true"></textarea>
+	        </div>                
+	    </form>  
+	</div>  
+    <div id="dlg-word_buttons">  
+        <a href="javascript:void(0)" id="btn_word_save" class="easyui-linkbutton" iconCls="icon-ok" >Save</a>  
+        <a href="javascript:void(0)" id="btn_word_cancel" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>  
+    </div>
 </article>
 

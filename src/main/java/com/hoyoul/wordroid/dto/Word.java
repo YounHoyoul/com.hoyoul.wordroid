@@ -29,7 +29,7 @@ public class Word {
 	@Column(name="DUETIME")
 	private Date dueTime;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne
 	@JoinColumn(name="WORDSETID")
 	private Wordset wordset;
 

@@ -34,10 +34,11 @@ I am making this system to study new framework for me first. After I make this s
 <img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/user.png?raw=true">
 
 ##Flash Card Set's Module
-- Making screen layout with only the static html
-<br/>
-<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset.png?raw=true">
-- Completed the CRUDL function of Folder and CardSet through Ajax with the tree plugin of "jEasyUI".
+- Completed the CRUDL function of Folder and CardSet through Ajax with the tree/form plugin of "jEasyUI".
+- Completed the CRUDL function of Word through Ajax with the datagrid/window/form plugin of "jEasyUI".
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset1.png?raw=true">
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset2.png?raw=true">
+<img src="https://github.com/YounHoyoul/com.hoyoul.wordroid/blob/master/flashcardset3.png?raw=true">
 
 ##Study with Flash Card
 

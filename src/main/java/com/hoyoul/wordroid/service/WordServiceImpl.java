@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.hoyoul.wordroid.dao.WordDAO;
 import com.hoyoul.wordroid.dto.Word;
+import com.hoyoul.wordroid.dto.Wordset;
 
 @Service
 public class WordServiceImpl implements WordService {
@@ -36,6 +37,26 @@ public class WordServiceImpl implements WordService {
 	@Override
 	public void deleteWord(Integer id) {
 		wordDAO.deleteWord(id);
+	}
+
+	@Override
+	public Long listWordCount(Wordset wordset) {
+		return wordDAO.listWordCount(wordset);
+	}
+
+	@Override
+	public Long listWordCount(Wordset wordset,String word) {
+		return wordDAO.listWordCount(wordset,word);
+	}
+
+	@Override
+	public List<Word> listWordByPage(Wordset wordset,int page, int rows) {
+		return wordDAO.listWordByPage(wordset,page,rows);
+	}
+
+	@Override
+	public List<Word> listWordByPage(Wordset wordset,String word, int page, int rows) {
+		return wordDAO.listWordByPage(wordset,word,page,rows);
 	}
 
 }
